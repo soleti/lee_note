@@ -5,8 +5,9 @@
 % Neutrino Energy Reconstruction
 
 \section{Energy reconstruction}\label{sec:energyreco}
+\subsection{Scope of the reconstruction}
+In this analysis we restrict ourselves to the measurement of the deposited energy in the TPC of the visible particles in the final state of the neutrino interaction. Our signal will have in its final state, by definition, one electron and at least one proton, with no other visible particles. The energy of the electron will be measured by converting the hit charge of all the shower-like objects into deposited energy, as described in Section \ref{sec:showerenergy}. The energy of the protons, instead, can be measured by converting the track length of the reconstructed tracks into deposited energy, using the tabulated stopping power of protons in the liquid argon, with the procedure described in \ref{sec:protonenergy}.
 
-Paragraph here describing general reco strategy: treat the protons and the electron separately.  
 
 \subsection{Electron energy reconstruction and calibration}\label{sec:showerenergy}
 The reconstructed energy $E_{reco}^{e}$ of a shower-like object is measured converting the charge of the associated hits into deposited energy in the TPC. It is calculated by multiplying the reconstructed charge ($e^{-}_{reco}$) from hits associated with the reconstructed shower by the calibration factor measured in \cite{michel}:
@@ -20,14 +21,14 @@ where:
 \item $\frac{23.6~\mathrm{eV}}{e^-}$ is the work function for ionizing an argon atom \cite{workfunction},
 \item $R = 0.62$ is the recombination factor obtained with the Modified Box Model \cite{boxmodel}.
 \end{itemize}
-Figure \ref{fig:ecalib} shows the calibration slope necessary to convert the reconstructed energy $E_{reco}$ into true electron energy $E_{true}$. It has been obtained using only the hits reconstructed in the collection plane. 
+Figure \ref{fig:ecalib} shows the calibration slope necessary to convert the electron reconstructed energy $E_{reco}^{e}$ into true electron energy $E_{true}^{e}$. It has been obtained using only the hits reconstructed in the collection plane. 
 The reconstructed energy is obtained summing the hits energy from each reconstructed shower matched to the true electron. The true electron and the reconstructed showers are required to be fully contained within the fiducial volume. Since the reconstructed energy distributions in each true energy bin is asymmetrical, the data points are obtained fitting a Gaussian around the peak of the distribution.
 A linear fit of the data points gives:
 \begin{equation}
 E_{reco}^{e} = 0.78~E^{e} - 0.02~\mathrm{GeV}.
 \end{equation}
 
-\begin{figure}[!htbp]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.65\columnwidth]{figures/ecalib.pdf}
 \caption{Bi-dimensional histogram of true electron energy $E^{e}$ vs. reconstructed electron energy $E_{reco}^{e}$. Black points are obtained measuring the most probable value of the $E_{reco}^{e}$ distribution for each $E^{e}$ bin.}
@@ -76,15 +77,37 @@ The final peak after the selection is shown in figure \ref{fig:pi0_mass_peak}. T
 
 The two results are significantly close to the nominal mass of 135~MeV, and shows a relatively good agreement between data and Monte Carlo. However, the discrepancy is significant and requires more investigation, in order to be understood completely.
 
-\begin{figure}[!htbp]
+\begin{figure}[htbp]
 \centering
-\includegraphics[width=0.8\textwidth]{_fig/data_mc_pi0_mass_peak_crb_cut_on_second_shower.png}
+\includegraphics[width=0.65\textwidth]{_fig/data_mc_pi0_mass_peak_crb_cut_on_second_shower.png}
 \caption{Diphoton invariant mass distribution for data and Monte Carlo. The two lines show the crystal ball functions as obtained from the ML fit to the two histrograms.} 
 \label{fig:pi0_mass_peak}
 \end{figure}
 
 \subsection{Hadronic Energy Reconstruction}
-\subsubsection{Single Proton energy reconstruction and calibration}
+\subsubsection{Single Proton energy reconstruction and calibration}\label{sec:protonenergy}
+Proton energy reconstruction is obtained converting the reconstructed track length $L$ into deposited energy using the proton stopping power in liquid argon, as tabulated in \cite{pstar}. Liquid argon density $\rho_{\mathrm{LAr}}$ is assumed to be constant at 1.379~g/ml. Figure \ref{fig:proton} shows the proton kinetic energy as a function of the range of the proton in liquid argon (measured as $L \times \rho_{\mathrm{LAr}}$) .
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.65\textwidth]{figures/proton.pdf}
+\caption{Proton kinetic energy as a function of the range of the proton in liquid argon. Values are taken from \cite{pstar}.} 
+\label{fig:proton}
+\end{figure}
+
+The calibration constant has been obtained comparing the reconstructed energy of the proton with the true kinetic energy of the proton, in a CC $\nu_{e}$ sample with only one proton in the final state. The true proton and the reconstructed tracks are required to be fully contained within the fiducial volume. Since protons are not MIPs, in the case of two or more tracks (\emph{split tracks}) associated to the same proton, the reconstructed length of the tracks has been summed before calculating the corresponding kinetic energy.
+Figure \ref{fig:pcalib} shows the calibration slope necessary to convert the proton reconstructed energy $E_{reco}^{p}$ into true proton kinetic energy $E_{true}^{p}$. For each bin of the true proton energy, the most probable value of the corresponding proton reconstructed energy has been obtained with a Gaussian fit around the peak of the distribution. A linear fit of the data points gives:
+\begin{equation}
+E_{reco}^{p} = 0.99~E^{p}.
+\end{equation}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.65\columnwidth]{figures/pcalib.pdf}
+\caption{Bi-dimensional histogram of true proton energy $E^{p}$ vs. reconstructed electron energy $E_{reco}^{p}$. Black points are obtained measuring the most probable value of the $E_{reco}^{p}$ distribution for each $E^{p}$ bin.}
+\label{fig:pcalib}
+\end{figure}
+
 
 \subsubsection{Neutrino Produced Hadronic Energy Reconstruction}
 
