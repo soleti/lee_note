@@ -41,7 +41,9 @@ In order to reconstruct the spectrum of the $\nu_{e}$ CC0$\pi$-Np events collect
 \end{enumerate}
 
 \subsection{Cosmic Hit Removal}
-\todo{Describe Marco's cosmic hit removal}.  Describe cosmic hit removal, as applied to this analysis
+Being located almost on surface, the MicroBooNE detector is constantly hit by atmospheric cosmic rays, at a rate of $\approx5$~kHz \cite{cosmic}. These cosmic rays will interact in the TPC, producing a combination of track-like and shower-like objects. 
+In order to suppress this cosmogenic background, the Pandora framework runs in two different modes with different settings \cite{pandora}: (1) \texttt{pandoraCosmic}, optimised for cosmic rays reconstruction, and (2) \texttt{pandoraNu}, optimised for neutrino interactions reconstruction.
+The reconstructed hits are first fed to the framework in the \texttt{pandoraCosmic} mode: hits that are deemed to be of cosmic origin are removed from the hit collection. The remaining hits are then fed again to the framework in the \texttt{pandoraNu} mode, which reconstructs the neutrino interaction candidates.
 
 \subsection{Optical Pre-Cuts}
 
@@ -139,7 +141,7 @@ An example of this procedure for a Monte Carlo generated $\nu_e$ event with 4 ne
 \end{figure}
 
 \subsection{Electron Neutrino Topological Pre-Selection}
-A perfect reconstruction of a $\nu_{e}$ CC0$\pi$-Np event in a LArTPC will produce as many reconstructed tracks as the number of protons in the final state and a single reconstructed shower (the electron), sharing a common vertex. However, the presence of missing or unresponsive wires can cause the splitting of an ionisation track or an electromagnetic showers into two distinct reconstructed object. Also, the type of object (track or shower) is assigned by a Support Vector Machine (SVM) implemented in the Pandora framework and its performances depend on the quality of the event (e.g. the number of hits). A track-like object (e.g. a proton or a muon), then, can be mis-reconstructed as a shower object, especially when the number of reconstructed hits is low \cite{pandora2}. In order to maximize our efficiency, then, we will require (1) \emph{at least} one track and \emph{at least} one shower sharing a common vertex, or (2) \emph{at least} two showers sharing a common vertex. Figure \ref{fig:dia} shows the two diagrams of the accepted topologies for a $\nu_{e}$ CC0$\pi$-Np candidate event.
+A perfect reconstruction of a $\nu_{e}$ CC0$\pi$-Np event in a LArTPC will produce as many reconstructed tracks as the number of protons in the final state and a single reconstructed shower (the electron), sharing a common vertex. However, the presence of missing or unresponsive wires can cause the splitting of an ionisation track or an electromagnetic showers into two distinct reconstructed object. Also, the type of object (track or shower) is assigned by a Support Vector Machine (SVM) implemented in the Pandora framework and its performances depend on the quality of the event (e.g. the number of hits). A track-like object (e.g. a proton or a muon), then, can be mis-reconstructed as a shower-like object, especially when the number of reconstructed hits is low \cite{pandora2}. In order to maximize our efficiency, then, we will require (1) \emph{at least} one track and \emph{at least} one shower sharing a common vertex, or (2) \emph{at least} two showers sharing a common vertex. Figure \ref{fig:dia} shows the two diagrams of the accepted topologies for a $\nu_{e}$ CC0$\pi$-Np candidate event.
 
 \begin{figure}[htbp]
 \centering
@@ -163,7 +165,7 @@ Figure \ref{fig:2showers} shows a Monte Carlo event display with an electromagne
 	\end{center}
 \end{figure}
 
-In these cases, in order to choose the proton track candidate among the two shower-like objects, we run a bi-dimensional Principal Component Analysis in the collection plane (one dimension is given by the drift time and the other by the wire coordinate). The object with the largest first eigenvalue is chosen as the proton track candidate and it is then consider as a track-like object.
+In these cases, in order to choose the proton track candidate among the two or more shower-like objects, we run a bi-dimensional Principal Component Analysis in the collection plane (one dimension is given by the drift time and the other by the wire coordinate). The object with the largest first eigenvalue is chosen as the proton track candidate and it is then considered as a track-like object.
 
 \subsubsection{Selection efficiency and purity}\label{sec:eff}
 A first estimate of the number of events that can be selected by our algorithm is obtained by measuring the selection efficiency and purity using a dedicated $\nu_{e}$ CC$0\pi$-Np Monte Carlo sample. Neutrino events have been generated using the GENIE Neutrino Monte Carlo generator \cite{genie} and cosmic rays have been generated using the CORSIKA Monte Carlo generator \cite{corsika}. 
@@ -184,7 +186,7 @@ A study on the reconstruction efficiency of proton tracks and electron showers i
     \includegraphics[width=\linewidth]{figures/electron_eff.pdf}
     \caption{Electron reconstruction efficiency} 
   \end{subfigure}
-  \caption{Proton (left, in red) and electron (right, in blue) reconstruction efficiency for simulated $\nu_{e}$ CC$0\pi$-Np events. In our sample of generated $\nu_{e}$ CC$0\pi$-Np events we require at least a proton above 40~MeV and at least an electron above 20~MeV.}
+  \caption{Proton (left, in red) and electron (right, in blue) reconstruction efficiency for simulated $\nu_{e}$ CC$0\pi$-Np events. In our sample of generated $\nu_{e}$ CC$0\pi$-Np events we require at least one proton above 40~MeV and at least an above 20~MeV.}
   \label{fig:kin_eff}
 \end{figure}
 
@@ -241,14 +243,14 @@ Table \ref{tab:result} shows a summary of the selection algorithm results, with 
      Category & \phantom{a} & Generated & \phantom{a} & Selected & \phantom{a} & Efficiency \\
      \midrule
 
-     $\nu_{e}$ CC0$\pi$-Np       & & 35.5     & & 12.7   & & 35.8\%\\
-     $\nu_{e}$ CC                & & 35.7     & & 12.0   & & 33.6\%\\
-     Beam intrinsic $\nu_{\mu}$  & & 11405.0  & & 805.8  & & 7.1\%\\
-     Beam intrinsic NC           & & 3660.3   & & 299.8  & & 8.2\%\\
-     Dirt                        & & 2651.1   & & 30.6   & & 1.2\%\\
-     Cosmic in-time              & & 135377.2 & & 1086.7 & & 0.8\%\\
-     Cosmic contaminated         & & -        & & 246.2  & & -\\
-     Cosmic                      & & -        & & 280.2  & & -\\
+     $\nu_{e}$ CC0$\pi$-Np       & & 34.8     & & 14.3   & & 41.1\%\\
+     $\nu_{e}$ CC                & & 35.7     & & 13.2   & & 37.0\%\\
+     Beam intrinsic $\nu_{\mu}$  & & 11337.4  & & 918.3  & & 8.1\%\\
+     Beam intrinsic NC           & & 3633.9   & & 342.2  & & 9.4\%\\
+     Dirt                        & & 2609.5   & & 37.1   & & 1.4\%\\
+     Cosmic in-time              & & 135377.2 & & 1151.6 & & 0.9\%\\
+     Cosmic contaminated         & & -        & & 260.7  & & -\\
+     Cosmic                      & & -        & & 233.3  & & -\\
 
      \bottomrule
    \end{tabular}
@@ -260,24 +262,26 @@ Table \ref{tab:result} shows a summary of the selection algorithm results, with 
 An object reconstructed by the Pandora framework in the TPC can be of two distinct types: track-like or shower-like. This assignment is performed directly by the Pandora framework using a Support Vector Machine. However, the scope of the framework is very broad and the object classification is not optimized on our topology. 
 The classifier is trained on simulated events, using information from all the three wire planes and its performances are proportional to the number of reconstructed hits. As such, even a slight disagreement between the detector behavior and its simulation in any of the wire planes can have a strong impact on the classification of track-like or shower-like objects. 
 Since our analysis heavily relies on the category of the reconstructed objects in its topology pre-selection, a good agreement between the classifier performances in data and Monte Carlo is essential.
-Moreover, the energy reconstruction procedure is different for track-like and shower-like objects, as described in Section \ref{sec:energyreco}: an eventual classification disagreement directly cause a disagreement in the reconstructed energy spectrum.
+Moreover, the energy reconstruction procedure is different for track-like and shower-like objects, as described in Section \ref{sec:energyreco}: an eventual classification disagreement will directly cause a disagreement in the reconstructed energy spectrum.
 
 The distributions of the number of track-like objects and of the number of shower-like objects in a selected event hint at a tendency of the classifier to select an object as shower-like more often in the data than in the simulation.
 
-Figure \ref{fig:nshowers} shows the number of showers and the number of tracks per event in our selected sample after the optical and topological pre-selection. The ratio plot clearly indicates the presence of a bias: there are more events with a high number of reconstructed showers and more events with a low number of reconstructed tracks in the data than in the Monte Carlo. 
 
 \begin{figure}[htbp]
 \centering
   \begin{subfigure}{0.45\textwidth}
-    \includegraphics[width=\linewidth]{figures/h_n_tracks.pdf}
-    \caption{N. of tracks} 
+    \includegraphics[width=\linewidth]{figures/h_n_tracks_before.pdf}
+    \caption{Number of tracks.} 
   \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
-    \includegraphics[width=\linewidth]{figures/h_n_showers.pdf}
-    \caption{N. of showers} 
+    \includegraphics[width=\linewidth]{figures/h_n_showers_before.pdf}
+    \caption{Number of showers.} 
   \end{subfigure}
   \caption{Number of tracks and number of showers per event before the reclassification procedure.}\label{fig:nshowers}
 \end{figure}
+
+Figure \ref{fig:nshowers} shows the number of showers and the number of tracks per event in our selected sample after the optical and topological pre-selection. The ratio plot clearly indicates the presence of a bias: there are more events with a high number of reconstructed showers and more events with a low number of reconstructed tracks in the data than in the Monte Carlo. 
+
 
 The distribution of the total number of reconstructed objects in Figure \ref{fig:nobjects} (regardless of their category) shows instead a very good agreement and no bias.
 
@@ -288,7 +292,7 @@ The distribution of the total number of reconstructed objects in Figure \ref{fig
   \label{fig:nobjects}
 \end{figure}
 
-The simulation does not perfectly reflects the detector status: in particular, we measured the hit residuals of the track-like objects in the collection plane, defined as the distance between the reconstructed hit position in two dimensions (wire, time) and the reconstructed track trajectory. Figure \ref{fig:res} shows that the mean of the residuals distribution is peaked around zero as expected, both for data and Monte Carlo, but the standard deviation in the data is shifted towards higher values. 
+The simulation does not perfectly reflects the detector status: in particular, we measured the hit residuals of the track-like objects in the collection plane, defined as the distance between the reconstructed hit position in two dimensions (wire, time) and the reconstructed track trajectory. Figure \ref{fig:res} shows that the distribution of the mean of the residuals is peaked around zero as expected, both for data and Monte Carlo, while the standard deviation in the data is shifted towards higher values. 
 
 \begin{figure}[htbp]
 \centering
@@ -328,9 +332,9 @@ This evidence points towards a detector mismodeling in the simulation: Figure \r
 \end{figure}
 
 \subsubsection{Reclassification procedure}
-In order to solve this discrepancy it is possible to reclassify the reconstructed objects exploiting the particular topology of our signal events. In particular, a well-reconstructed $\nu{e}$ CC0$\pi$-Np event will have a reconstructed shower corresponding to the electron and N reconstructed tracks, where N is the number of protons above detection threshold. 
+In order to solve this discrepancy it is possible to reclassify the reconstructed objects exploiting the particular topology of our signal events. In particular, a well-reconstructed $\nu_{e}$ CC0$\pi$-Np event will have a reconstructed shower corresponding to the electron and N reconstructed tracks, where N is the number of protons above detection threshold. 
 
-The Pandora reconstruction framework can split the electromagnetic shower in two or more objects: however, even if distinct, the showers will have in general a low angular separation. A small reconstructed shower-like object with a high angular separation from the most energetic one has a high probability to be in reality a mis-reconstructed proton track. Thus, we reclassify the shower-like objects based on the angular separation between each small shower-like object and the most-energetic shower: if the angle is larger than $15^{\circ}$ the shower-like object is considered as a track-like object.
+The Pandora reconstruction framework can split the electromagnetic shower in two or more objects: however, even if distinct, the showers will have in general a low angular separation. A small reconstructed shower-like object with a high angular separation from the most energetic one has a high probability to be in reality a mis-reconstructed proton track. Thus, we reclassify the shower-like objects based on the angular separation between each small shower-like object and the most-energetic shower: if the angle is larger than $15^{\circ}$, the shower-like object is reclassified as a track-like object.
 
 Figure \ref{fig:showerangle} shows the proton reconstruction efficiency and purity as a function of the angular reclassification cut. The $15^{\circ}$ threshold is chosen because it maximizes the efficiency while keeping a reasonable reconstruction purity (above 70\%).
 
@@ -343,23 +347,25 @@ Figure \ref{fig:showerangle} shows the proton reconstruction efficiency and puri
 
 It is also possible for a small electron shower remnant to be reconstructed as a track-like object. Thus, we reclassify a track-like object as a shower if it is within the cone of the most energetic shower. This reclassification correctly identifies a shower remnant in the 98.9\% of the cases.
 
-Figure \ref{fig:nshowers_after} shows the number of shower-like objects and the number of track-like objects per event after the reclassification. The agreement improves and the bias in the ratio disappears. 
-
 \begin{figure}[htbp]
 \centering
   \begin{subfigure}{0.45\textwidth}
     \includegraphics[width=\linewidth]{figures/h_n_tracks.pdf}
-    \caption{N. of tracks} 
+    \caption{Number of tracks.} 
   \end{subfigure}
     \begin{subfigure}{0.45\textwidth}
     \includegraphics[width=\linewidth]{figures/h_n_showers.pdf}
-    \caption{N. of showers} 
+    \caption{Number of showers.} 
   \end{subfigure}
   \caption{Number of tracks and number of showers per event after the reclassification procedure.}\label{fig:nshowers_after}
 \end{figure}
 
+
+
+Figure \ref{fig:nshowers_after} shows the number of shower-like objects and the number of track-like objects per event after these two reclassification procedures. The agreement improves and the bias in the ratio disappears. 
+
 \subsection{CC \texorpdfstring{$\nu_{\mu}$}{numu} Event Rejection}\label{sec:numu}
-The module \texttt{UBXSec} \cite{ubxsec} looks for charged-current $\nu_{\mu}$ candidates and it also helps reject cosmic-induced background events.  Figure \ref{fig:spectrum} shows the reconstructed energy spectrum obtained vetoing the events that \texttt{UBXSec} flagged as CC $\nu_{\mu}$ candidates or cosmic-induced background (the reconstructed energy has been measured with the procedure described in Section \ref{sec:energyreco}). The ratio between the number of data events and the number of Monte Carlo events (POT normalized) is compatible with the unity (1.01) and the low value of the $\chi^{2} / \mathrm{n.d.f.}$ (0.29) shows that the two distributions agree also in shape.
+The module \texttt{UBXSec} \cite{ubxsec} looks for charged-current $\nu_{\mu}$ candidates and it also helps reject cosmic-induced background events.  Figure \ref{fig:spectrum} shows the reconstructed energy spectrum obtained vetoing the events that \texttt{UBXSec} flagged as CC $\nu_{\mu}$ candidates or cosmic-induced background (the reconstructed energy has been measured with the procedure described in Section \ref{sec:energyreco}). The ratio between the number of data events and the number of Monte Carlo events (POT normalized) is compatible with the unity (0.99) and the low value of the $\chi^{2} / \mathrm{n.d.f.}$ (1.11) shows that the two distributions agree also in shape.
 
 \begin{figure}[htbp]
 \centering
@@ -446,7 +452,7 @@ The aim of the analysis is to find $\nu_{e}$ CC$0\pi$-Np events. As such, it is 
 \subsubsection{Track-shower angle}
 Low-energy electrons often start producing an appreciable shower in the detector after several centimeters. As such, the reconstruction framework identifies the first part of the shower as a track-like object and the last part of the shower as a shower-like object. 
 Furthermore, high-energy cosmic rays can produce a shower in the detector, which will be mostly aligned to the track. In order to remove these mis-reconstructed events and reduce this kind of cosmogenic background we require $\mathrm{cos}\theta > -0.9$, where $\theta$ is the angle between the most energetic shower and the most proton-like track, as identified by the procedure described in Section \ref{sec:protbdt}.
-Figure \ref{fig:angle} shows the event displays of a cosmic ray showering in the last part and of an electron shower being reconstructed as track plus a shower.
+Figure \ref{fig:angle} shows the event displays of a cosmic ray showering in the last part and of an electron shower being reconstructed as a track plus a shower.
 
 \begin{figure}[htbp]
 \centering
@@ -458,7 +464,7 @@ Figure \ref{fig:angle} shows the event displays of a cosmic ray showering in the
     \includegraphics[width=\linewidth]{figures/angle2.png}
     \caption{Electron shower} 
   \end{subfigure}
-  \caption{Monte Carlo event displays of a cosmic ray showering in the detector (left) and of an electron shower. Both objects were reconstructed in the first part as a track-like object and in the last part as a shower-like object}\label{fig:angle}
+  \caption{Monte Carlo event displays of a cosmic ray showering in the detector (left) and of an electron shower (right). Both objects were reconstructed in the first part as a track-like object and in the last part as a shower-like object}\label{fig:angle}
 \end{figure}
 
 
