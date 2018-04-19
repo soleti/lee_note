@@ -37,41 +37,43 @@ E_{reco}^{e} = 0.78~E^{e} - 0.02~\mathrm{GeV}.
 
 
 
-\subsection{\texorpdfstring{$\pi^0$}{pi0} mass peak}
+\subsubsection{\texorpdfstring{$\pi^0$}{pi0} mass peak}
 
 CC$\pi^0$ events have been studied in order to validate the energy scale and reconstruction in the low-energy region in data as well as in the Monte Carlo. There is no aim for an analysis in the CC$\pi^0$ channel. Instead the purpose is to exploit a pure sample of $\pi^0$ decays, which can be used as standard candle to validate the energy reconstruction.
 The samples which have been used are:
 \begin{itemize}
   \item Data: hand scanned CC$\pi^0$ sample, which has been already used in \cite{caratelli}
-  \item Monte Carlo: BNB + cosmic + generator level requirements:
-  	\begin{itemize}
-  		\item Selected neutrino matched to a true neutrino
-		\item Charged current interaction
-		\item Exactly one $\pi^0$ in the final state
-  	\end{itemize}
+  \item Monte Carlo: BNB intrinsic $\nu_{\mu}$ with cosmic rays. generator level requirements:
 \end{itemize}
-The selection relies on the optical selection presented before (ref. to optical selection). Subsequently events are required to have at least two reconstructed showers with hits on the collection plane. The second requirement is meant to remove events with null shower energy, as the energy is computed from the collection plane only. The energy of the showers is calibrated using the energy calibration shown previously (derived from electrons-matched-showers using the Monte Carlo, ref. to this calibration).
-The $\pi^0$ candidate is computed starting from the two most energetic showers. The distribution of the number of reconstructed showers in each event is shown in the left plot in fig. \ref{fig:mc_mass_e2} for data and MC.
+The optical selection, described in section \ref{sec:optical_pre_cuts}, and the topological pre-selection, described in section \ref{sec:topological_pre_selection}, are applied to both samples.\\
+An additional set of generator level requirements is applied to the Monte Carlo sample, in order to identify CC$\pi^0$ using truth information:
+\begin{itemize}
+    \item The selected neutrino interaction must be matched to the true neutrino interaction
+    \item The interaction must be a charged current interaction
+    \item Exactly one $\pi^0$ must be present in the final state
+\end{itemize}
+Subsequently events are required to have at least two reconstructed showers, both with hits on the collection plane. The second requirement is meant to remove events with null shower energy, as the energy is computed from the collection plane only. The energy of the showers is calibrated as shown previously in section \ref{sec:showerenergy}, deriving correction factors from electrons-matched-showers using the simulation, as shown in Figure \ref{fig:ecalib}.
+The $\pi^0$ candidate is computed starting from the two most energetic showers. The distribution of the number of reconstructed showers in each event is shown in the left plot in Figure \ref{fig:mc_mass_e2} for data and MC.
 
 As there are many events with more than two showers, about two thirds in data and one half in Monte Carlo, a simple re-clustering of the energy is performed. It is meant to recover the energy from broken showers. The two most energetic showers are considered. Then, the energy of any additional shower is summed to the closest in angle among the two most energetic showers. The direction of the two most energetic showers is not modified in this process. The mass is computed from the two most energetic showers, with the energy corrected after the re-clustering, as:
-\[ M = \sqrt{E_1 E_2 (1 - \cos\theta)} \]\textbf{}
+\[ M = \sqrt{E_1 E_2 (1 - \cos\theta)} \]
 where $E_1$ and $E_2$ are the energies of the most and the second most energetic showers, respectively. $\theta$ is the 3-D angle between the directions of the two showers.
 
 \begin{figure}[!htbp]
 \centering
 \begin{minipage}{0.49\columnwidth}
-  \includegraphics[width=0.99\columnwidth]{_fig/n_showers_data_MC_comparison.pdf}
+  \includegraphics[width=0.99\columnwidth]{figures/n_showers_data_MC_comparison_mod.pdf}
 \end{minipage}
 \begin{minipage}{0.49\columnwidth} 
-  \includegraphics[width=0.99\columnwidth]{_fig/MC_mass_E2.pdf}
+  \includegraphics[width=0.99\columnwidth]{figures/MC_mass_E2.pdf}
 \end{minipage}
 \caption{Left: Distribution of the number of showers for each event, for data (black dots) and Monte Carlo (red boxes). Right: Bi-dimensional distribution of $E_2$ (y-axis) versus the invariant mass (x-axis) in Monte Carlo events.}
 \label{fig:mc_mass_e2}
 \end{figure}
 
-In some cases a significant amount of energy is missing. For instance one of the two true showers is missed, and a smaller showers, resulting from noise or from mis-reconstruction of other objects, is taken as one of the decay products of the $\pi^0$. The right plot in figure \ref{fig:mc_mass_e2} shows the bi-dimensional distribution of the invariant mass (x-axis) versus $E_2$ (x-axis) for Monte Carlo events. As it is possible to see, a significant amount of events has small $E_2$ and small mass. Thus, to take into account this effect and remove events with one shower badly or mis-reconstructed, the second most energetic shower is required to have reconstructed energy larger than 30 MeV.
+In some cases a significant amount of energy is missing. For instance, one of the two main showers is missed, and a smaller shower, resulting from noise or from mis-reconstruction of other objects, is taken as one of the decay products of the $\pi^0$. The right plot in Figure \ref{fig:mc_mass_e2} shows the bi-dimensional distribution of the invariant mass (x-axis) versus $E_2$ (x-axis) for Monte Carlo events. As it is possible to see, a significant amount of events has small $E_2$ and small mass. Thus, to take into account this effect and remove events with one shower badly or mis-reconstructed, the second most energetic shower is required to have reconstructed energy larger than 30~MeV.
 
-The final peak after the selection is shown in figure \ref{fig:pi0_mass_peak}. The two histograms, for data and Monte Carlo, are fitted through a binned ML fit with a crystal ball function (Gaussian core, $C^1$-matched with a power-law right tail). The fit result, for what concerns the core is:
+The final peak after the selection is shown in Figure \ref{fig:pi0_mass_peak}. The two histograms, for data and Monte Carlo, are fitted through a binned maximum likelihood (ML) fit with a crystal ball function, which consists of a Gaussian core, $C^1$-matched with a power-law right tail. The fit result, for what concerns the core is:
 \[ \text{Data:} \quad \mu = 133 \pm 7~\text{MeV}, \quad \sigma = 47 \pm 5~\text{MeV} \]
 \[ \text{Monte Carlo:} \quad \mu = 119 \pm 2~\text{MeV}, \quad \sigma = 51 \pm 2~\text{MeV} \]
 
@@ -79,13 +81,13 @@ The two results are significantly close to the nominal mass of 135~MeV, and show
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.65\textwidth]{_fig/data_mc_pi0_mass_peak_crb_cut_on_second_shower.png}
+\includegraphics[width=0.65\textwidth]{figures/pi0_mass_peak_final.pdf}
 \caption{Diphoton invariant mass distribution for data and Monte Carlo. The two lines show the crystal ball functions as obtained from the ML fit to the two histrograms.} 
 \label{fig:pi0_mass_peak}
 \end{figure}
 
-\subsection{Hadronic Energy Reconstruction}
-\subsubsection{Single Proton energy reconstruction and calibration}\label{sec:protonenergy}
+% \subsection{Hadronic Energy Reconstruction}
+\subsection{Single proton energy reconstruction and calibration}\label{sec:protonenergy}
 Proton energy reconstruction is obtained converting the reconstructed track length $L$ into deposited energy using the proton stopping power in liquid argon, as tabulated in \cite{pstar}. Liquid argon density $\rho_{\mathrm{LAr}}$ is assumed to be constant at 1.379~g/ml. Figure \ref{fig:proton} shows the proton kinetic energy as a function of the range of the proton in liquid argon (measured as $L \times \rho_{\mathrm{LAr}}$) .
 
 \begin{figure}[htbp]
@@ -109,6 +111,6 @@ E_{reco}^{p} = 0.99~E^{p}.
 \end{figure}
 
 
-\subsubsection{Neutrino Produced Hadronic Energy Reconstruction}
+% \subsubsection{Neutrino Produced Hadronic Energy Reconstruction}
 
-\subsection{Neutrino Energy Reconstruction}
+% \subsection{Neutrino Energy Reconstruction}

@@ -36,18 +36,18 @@ In order to reconstruct the spectrum of the $\nu_{e}$ CC0$\pi$-Np events collect
 \item Optical pre-cuts and flash-matching: a minimum amount of photoelectrons in the optical system is required. At least one of the neutrino candidates provided by the Pandora framework must be then compatible with the flash in the optical system.
 \item Electron neutrino topological pre-selection: one of the neutrino candidates must be compatible with the topology of a $\nu_{e}$ CC0$\pi$-Np interaction, that is at least one track and at least one shower or at least two showers sharing a common vertex.
 \item CC $\nu_{\mu}$ neutrino and cosmic-ray candidates removal: events tagged as CC $\nu_{\mu}$ neutrino candidates or non-neutrino induced are vetoed by an external module.
-\item Background rejection through calorimetric and topological cuts: $\nu_{e}$ CC0$\pi$-Np events are further isolated applying several boxed cuts on kinematic, geometric, and calorimetric variables. The electromagnetic showers initiated by an electron in the final state are isolated with a cut on the $dE/dx$ value. The proton tracks are selected with a Boosted Decision Tree trained on the track $dQ/dx$ and its length.
+\item Background rejection through calorimetric and geometric cuts: $\nu_{e}$ CC0$\pi$-Np events are further isolated applying several boxed cuts on kinematic, geometric, and calorimetric variables. The electromagnetic showers initiated by an electron in the final state are isolated with a cut on the $dE/dx$ value. The proton tracks are selected with a Boosted Decision Tree trained on the track $dQ/dx$ and its length.
 \item Energy spectrum reconstruction: the energy of the electron showers is measured with a hit-based procedure, while the energy deposited by the proton tracks is calculated from the length of the reconstructed track. 
 \end{enumerate}
 
 \subsection{Cosmic Hit Removal}
 Being located almost on surface, the MicroBooNE detector is constantly hit by atmospheric cosmic rays, at a rate of $\approx5$~kHz \cite{cosmic}. These cosmic rays will interact in the TPC, producing a combination of track-like and shower-like objects. 
-In order to suppress this cosmogenic background, the Pandora framework runs in two different modes with different settings \cite{pandora}: (1) \texttt{pandoraCosmic}, optimised for cosmic rays reconstruction, and (2) \texttt{pandoraNu}, optimised for neutrino interactions reconstruction.
-The reconstructed hits are first fed to the framework in the \texttt{pandoraCosmic} mode: hits that are deemed to be of cosmic origin are removed from the hit collection. The remaining hits are then fed again to the framework in the \texttt{pandoraNu} mode, which reconstructs the neutrino interaction candidates.
+In order to suppress this cosmogenic background, the Pandora framework runs in two different modes with different settings \cite{pandora}: (1) \texttt{pandoraCosmic}, optimized for cosmic rays reconstruction, and (2) \texttt{pandoraNu}, optimized for neutrino interactions reconstruction.
+The reconstructed hits are first fed to the framework in the \texttt{pandoraCosmic} mode. Then, a series of cosmic-ray tagging algorithms are applied to the objects reconstructed by Pandora in this mode \cite{ubxsec}. The reconstructed hits that are deemed to be of cosmic origin by the tagging algorithms are removed from the hit collection. The remaining hits are then fed again to the framework in the \texttt{pandoraNu} mode, which reconstructs the neutrino interaction candidates.
 
-\subsection{Optical Pre-Cuts}
+\subsection{Optical Pre-Cuts}\label{sec:optical_pre_cuts}
 
-The first requirement ensures the presence of light in the detector in a position compatible with the centre of the collected charge of the neutrino interaction candidate and with a timing compatible with the beam-gate window.
+The first requirement ensures the presence of light in the detector in a position compatible with the center of the collected charge of the neutrino interaction candidate and with a timing compatible with the beam-gate window.
 
 It is also possible and likely that an event will have multiple neutrino candidates. The goal of the optical selection is reducing the number of candidates to maximal one candidate in each event. This process consists of three major parts:
 \begin{enumerate}
@@ -140,8 +140,8 @@ An example of this procedure for a Monte Carlo generated $\nu_e$ event with 4 ne
 \label{fig:flashmatch}
 \end{figure}
 
-\subsection{Electron Neutrino Topological Pre-Selection}
-A perfect reconstruction of a $\nu_{e}$ CC0$\pi$-Np event in a LArTPC will produce as many reconstructed tracks as the number of protons in the final state and a single reconstructed shower (the electron), sharing a common vertex. However, the presence of missing or unresponsive wires can cause the splitting of an ionisation track or an electromagnetic showers into two distinct reconstructed object. Also, the type of object (track or shower) is assigned by a Support Vector Machine (SVM) implemented in the Pandora framework and its performances depend on the quality of the event (e.g. the number of hits). A track-like object (e.g. a proton or a muon), then, can be mis-reconstructed as a shower-like object, especially when the number of reconstructed hits is low \cite{pandora2}. In order to maximize our efficiency, then, we will require (1) \emph{at least} one track and \emph{at least} one shower sharing a common vertex, or (2) \emph{at least} two showers sharing a common vertex. Figure \ref{fig:dia} shows the two diagrams of the accepted topologies for a $\nu_{e}$ CC0$\pi$-Np candidate event.
+\subsection{Electron Neutrino Topological Pre-Selection}\label{sec:topological_pre_selection}
+A perfect reconstruction of a $\nu_{e}$ CC0$\pi$-Np event in a LArTPC will produce as many reconstructed tracks as the number of protons in the final state and a single reconstructed shower (the electron), sharing a common vertex. However, the presence of missing or unresponsive wires can cause the splitting of an ionization track or an electromagnetic showers into two distinct reconstructed object. Also, the type of object (track or shower) is assigned by a Support Vector Machine (SVM) implemented in the Pandora framework and its performances depend on the quality of the event (e.g. the number of hits). A track-like object (e.g. a proton or a muon), then, can be mis-reconstructed as a shower-like object, especially when the number of reconstructed hits is low \cite{pandora2}. In order to maximize our efficiency, then, we will require (1) \emph{at least} one track and \emph{at least} one shower sharing a common vertex, or (2) \emph{at least} two showers sharing a common vertex. Figure \ref{fig:dia} shows the two diagrams of the accepted topologies for a $\nu_{e}$ CC0$\pi$-Np candidate event.
 
 \begin{figure}[htbp]
 \centering
@@ -257,14 +257,25 @@ Table \ref{tab:result} shows a summary of the selection algorithm results, with 
    \caption{Summary of the selection algorithm results, showing the contribution of each event category, for a MicroBooNE exposure of \num{4.84e19} POT.}\label{tab:result}
 \end{table}
 
-\subsection{Track-like/Shower-like object reclassification}
+
+\subsection{CC \texorpdfstring{$\nu_{\mu}$}{numu} Event Rejection}\label{sec:numu}
+The module \texttt{UBXSec} \cite{ubxsec} looks for charged-current $\nu_{\mu}$ candidates and it also helps reject cosmic-induced background events.  Figure \ref{fig:spectrum} shows the reconstructed energy spectrum obtained vetoing the events that \texttt{UBXSec} flagged as CC $\nu_{\mu}$ candidates or cosmic-induced background. The reconstructed energy has been measured with the procedure described in Section \ref{sec:energyreco}, after reclassifying the reconstructed Pandora objects as described in Section \ref{sec:reclass}. The ratio between the number of data events and the number of Monte Carlo events (POT normalized) is 1 and the low value of the $\chi^{2} / \mathrm{n.d.f.}$ (1.06) shows that the two distributions agree also in shape. This plot also shows that our selection procedure has similar performances in data and Monte Carlo and that there is no evident bias in the energy reconstruction.
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.65\linewidth]{figures/h_fixed_energy.pdf}
+  \caption{Reconstructed energy spectrum after the event selection algorithm and the veto of the events selected by the \texttt{UBXSec} module. The histograms of the event categories are stacked.}
+  \label{fig:spectrum}
+\end{figure}
+
+
+
+\subsection{Track-like/Shower-like object reclassification}\label{sec:reclass}
 \subsubsection{Classifier disagreement}
 An object reconstructed by the Pandora framework in the TPC can be of two distinct types: track-like or shower-like. This assignment is performed directly by the Pandora framework using a Support Vector Machine. However, the scope of the framework is very broad and the object classification is not optimized on our topology. 
 The classifier is trained on simulated events, using information from all the three wire planes and its performances are proportional to the number of reconstructed hits. As such, even a slight disagreement between the detector behavior and its simulation in any of the wire planes can have a strong impact on the classification of track-like or shower-like objects. 
 Since our analysis heavily relies on the category of the reconstructed objects in its topology pre-selection, a good agreement between the classifier performances in data and Monte Carlo is essential.
 Moreover, the energy reconstruction procedure is different for track-like and shower-like objects, as described in Section \ref{sec:energyreco}: an eventual classification disagreement will directly cause a disagreement in the reconstructed energy spectrum.
-
-The distributions of the number of track-like objects and of the number of shower-like objects in a selected event hint at a tendency of the classifier to select an object as shower-like more often in the data than in the simulation.
 
 
 \begin{figure}[htbp]
@@ -280,10 +291,7 @@ The distributions of the number of track-like objects and of the number of showe
   \caption{Number of tracks and number of showers per event before the reclassification procedure.}\label{fig:nshowers}
 \end{figure}
 
-Figure \ref{fig:nshowers} shows the number of showers and the number of tracks per event in our selected sample after the optical and topological pre-selection. The ratio plot clearly indicates the presence of a bias: there are more events with a high number of reconstructed showers and more events with a low number of reconstructed tracks in the data than in the Monte Carlo. 
-
-
-The distribution of the total number of reconstructed objects in Figure \ref{fig:nobjects} (regardless of their category) shows instead a very good agreement and no bias.
+The distributions of the number of track-like objects and of the number of shower-like objects in a selected event hint at a tendency of the classifier to select an object as shower-like more often in the data than in the simulation.
 
 \begin{figure}[htbp]
 \centering
@@ -291,6 +299,11 @@ The distribution of the total number of reconstructed objects in Figure \ref{fig
   \caption{Distribution of the total number of reconstructed objects per event.}
   \label{fig:nobjects}
 \end{figure}
+
+Figure \ref{fig:nshowers} shows the number of showers and the number of tracks per event in our selected sample after the optical and topological pre-selection. The ratio plot clearly indicates the presence of a bias: there are more events with a high number of reconstructed showers and more events with a low number of reconstructed tracks in the data than in the Monte Carlo. 
+
+The distribution of the total number of reconstructed objects in Figure \ref{fig:nobjects} (regardless of their category) shows instead a very good agreement and no bias.
+
 
 The simulation does not perfectly reflects the detector status: in particular, we measured the hit residuals of the track-like objects in the collection plane, defined as the distance between the reconstructed hit position in two dimensions (wire, time) and the reconstructed track trajectory. Figure \ref{fig:res} shows that the distribution of the mean of the residuals is peaked around zero as expected, both for data and Monte Carlo, while the standard deviation in the data is shifted towards higher values. 
 
@@ -322,7 +335,7 @@ The distribution of the principal component eigenvalue for track-like objects an
   \caption{Principal Component first eigenvalue for reconstructed tracks and reconstructed showers.}\label{fig:pca}
 \end{figure}
 
-This evidence points towards a detector mismodeling in the simulation: Figure \ref{fig:evdpandora} shows the Pandora data event display in one of the induction plane of a track objects that was reconstructed as a shower-like object. The presence of noise hits around the track created artefacts that induced the SVM to classify the object as a shower.
+This evidence points towards a detector mis-modeling in the simulation: Figure \ref{fig:evdpandora} shows the Pandora data event display in one of the induction plane of a track objects that was reconstructed as a shower-like object. The presence of noise hits around the track created artifacts that induced the SVM to classify the object as a shower.
 
 \begin{figure}[htbp]
 \centering
@@ -345,7 +358,7 @@ Figure \ref{fig:showerangle} shows the proton reconstruction efficiency and puri
   \label{fig:showerangle}
 \end{figure}
 
-It is also possible for a small electron shower remnant to be reconstructed as a track-like object. Thus, we reclassify a track-like object as a shower if it is within the cone of the most energetic shower. This reclassification correctly identifies a shower remnant in the 98.9\% of the cases.
+It is also possible for a small electron shower remnant to be reconstructed as a track-like object. Thus, we reclassify a track-like object as a shower if it is within the cone of the most energetic shower. This criterion correctly identifies a shower remnant in the 98.9\% of the cases.
 
 \begin{figure}[htbp]
 \centering
@@ -360,26 +373,14 @@ It is also possible for a small electron shower remnant to be reconstructed as a
   \caption{Number of tracks and number of showers per event after the reclassification procedure.}\label{fig:nshowers_after}
 \end{figure}
 
-
-
 Figure \ref{fig:nshowers_after} shows the number of shower-like objects and the number of track-like objects per event after these two reclassification procedures. The agreement improves and the bias in the ratio disappears. 
-
-\subsection{CC \texorpdfstring{$\nu_{\mu}$}{numu} Event Rejection}\label{sec:numu}
-The module \texttt{UBXSec} \cite{ubxsec} looks for charged-current $\nu_{\mu}$ candidates and it also helps reject cosmic-induced background events.  Figure \ref{fig:spectrum} shows the reconstructed energy spectrum obtained vetoing the events that \texttt{UBXSec} flagged as CC $\nu_{\mu}$ candidates or cosmic-induced background (the reconstructed energy has been measured with the procedure described in Section \ref{sec:energyreco}). The ratio between the number of data events and the number of Monte Carlo events (POT normalized) is compatible with the unity (0.99) and the low value of the $\chi^{2} / \mathrm{n.d.f.}$ (1.11) shows that the two distributions agree also in shape.
-
-\begin{figure}[htbp]
-\centering
-  \includegraphics[width=0.65\linewidth]{figures/h_fixed_energy.pdf}
-  \caption{Reconstructed energy spectrum after the event selection algorithm and the veto of the events selected by the \texttt{UBXSec} module. The histograms of the event categories are stacked.}
-  \label{fig:spectrum}
-\end{figure}
 
 \subsection{Background Rejection}\label{sec:bkg}
 \subsubsection{Introduction}
-In this section we will describe the cuts applied to our selected sample, in order to isolate the $\nu_{e}$ CC$0\pi$-Np event candidates. The cuts have been chosen to (1) reduce the background, and (2) ensure that the selected events are well reconstructed. The values of each cut have been chosen manually. It would have been possible, in theory, to calculate an optimal set of cuts, maximized by the significance of the $\nu_{e}$ CC0$\pi$-Np events. However, this set of cuts would not have allowed a correct validation of the final selected sample, due to the limited size of the data un-blind sample. As such, the chosen cuts increase the purity of our sample, but also retain a significant amount ($\approx 20$) of selected data events.
+In this section we will describe the cuts applied to our selected sample, in order to isolate the $\nu_{e}$ CC$0\pi$-Np event candidates. The cuts have been chosen to (1) reduce the background, and (2) ensure that the selected events are well reconstructed. The values of each cut have been chosen manually. It would have been possible, in theory, to calculate an optimal set of cuts, maximized by the significance of the $\nu_{e}$ CC0$\pi$-Np events. However, this set of cuts would not have allowed a correct validation of the final selected sample, due to the limited size of the data unblinded sample. As such, the chosen cuts increase the purity of our sample, but also retain a significant amount ($\approx 20$) of selected data events.
 
 \subsubsection{Shower \texorpdfstring{$dE/dx$}{dE/dx}}
-The rate of energy loss per length ($dE/dx$) for electromagnetic showers is measured with a procedure analogous to the one described in \cite{argoneut}. All of the hits of the collection plane within a rectangle of 4~cm along the direction of the shower and 1~cm perpendicular to the shower are collected. Figure \ref{fig:evddedx} shows a Monte Carlo event display with an electron shower and the rectangle used to measure the $dE/dx$.
+The rate of energy loss per length ($dE/dx$) for electromagnetic showers is measured with a procedure analogous to the one described in \cite{argoneut}. All the hits of the collection plane within a rectangle of 4~cm along the direction of the shower and 1~cm perpendicular to the shower are collected. Figure \ref{fig:evddedx} shows a Monte Carlo event display with an electron shower and the rectangle used to measure the $dE/dx$.
 
 \begin{figure}[htbp]
 \centering
@@ -410,7 +411,7 @@ Figure \ref{fig:dedx} shows the $dE/dx$ hit distribution and the $dE/dx$ median 
 \end{figure}
 
 
-The first peak is caused by low-energy photons and, to a lesser extent, Compton scattering. When a low energetic photon converts into a $e^+e^-$ pair, in the case of a very asymmetric decay, the electron (or the positron) can have a very low deposited energy. In this case, one of the two particle will travel for a much shorter distance than the 4~cm rectangle length, causing the median of the distribution to be 2~MeV/cm and not 4~MeV/cm \cite{caratelli}. Figure \ref{fig:dedx_energy} shows the a bi-dimensional histogram of the $dE/dx$ vs. the reconstructed energy for simulated photon showers: the first peak is mainly caused by low-energy showers. In our sample, the cut applied on the most energetic shower is $1~\mathrm{MeV/cm} < dE/dx < 3.2~\mathrm{MeV/cm}$.
+The first peak is caused by low-energy photons and, to a lesser extent, Compton scattering. When a low energetic photon converts into a $e^+e^-$ pair, in the case of a very asymmetric decay, the electron (or the positron) can have a very low deposited energy. In this case, one of the two particle will travel for a much shorter distance than the 4~cm rectangle length, causing the median of the distribution to be 2~MeV/cm and not 4~MeV/cm \cite{caratelli}. Figure \ref{fig:dedx_energy} shows a bi-dimensional histogram of the $dE/dx$ vs. the reconstructed energy for simulated photon showers: as expected, the first peak is mainly caused by low-energy showers. In our sample, the cut applied on the most energetic shower is $1~\mathrm{MeV/cm} < dE/dx < 3.2~\mathrm{MeV/cm}$.
 
 
 \begin{figure}[htbp]
@@ -452,7 +453,7 @@ The aim of the analysis is to find $\nu_{e}$ CC$0\pi$-Np events. As such, it is 
 \subsubsection{Track-shower angle}
 Low-energy electrons often start producing an appreciable shower in the detector after several centimeters. As such, the reconstruction framework identifies the first part of the shower as a track-like object and the last part of the shower as a shower-like object. 
 Furthermore, high-energy cosmic rays can produce a shower in the detector, which will be mostly aligned to the track. In order to remove these mis-reconstructed events and reduce this kind of cosmogenic background we require $\mathrm{cos}\theta > -0.9$, where $\theta$ is the angle between the most energetic shower and the most proton-like track, as identified by the procedure described in Section \ref{sec:protbdt}.
-Figure \ref{fig:angle} shows the event displays of a cosmic ray showering in the last part and of an electron shower being reconstructed as a track plus a shower.
+Figure \ref{fig:angle} shows the event displays of a cosmic ray showering in the last part and of an electron shower being reconstructed as a track-like object plus a shower-like object.
 
 \begin{figure}[htbp]
 \centering
@@ -473,6 +474,7 @@ Reconstructed showers corresponding to low-energy electrons will have in general
 
 \subsubsection{Track length}
 Our signal sample will contain only protons in the final state. Protons in liquid argon have a higher stopping power than muons, which will correspond on average to shorter tracks. Each reconstructed track in the selected sample is required to be shorter than 80 cm. This cut helps rejecting mainly CC $\nu_{\mu}$ events with high-energy muons in the final state.
+Thus, an increased size of the unblinded data sample could allow us to apply more efficient cuts.
 
 % \subsection{Optical selection}
 
