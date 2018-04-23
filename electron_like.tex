@@ -17,11 +17,11 @@ The reconstructed energy spectrum of the selected events after the application o
 The final number of selected data events in the unblinded data sample is 21, corresponding to a MicroBooNE exposure of \num{4.84e19} POT. These events have been hand-scanned: Figure \ref{fig:evds} shows the event displays of two $\nu_{e}$-like selected data events.
 
 
-The data BNB distribution is in good agreement with the stacked Monte Carlo + EXT distributions, both in normalization (the integral ratio is 1.03) and in shape ($\chi^2 /\mathrm{n.d.f.} = 0.68$). 
+The data BNB distribution is in good agreement with the stacked Monte Carlo + EXT distributions, both in normalization (the integral ratio is 1.02) and in shape ($\chi^2 /\mathrm{n.d.f.} = 0.51$). 
 %The signal component ($\nu_{e}$ CC0$\pi$-Np events) represents now the largest component among the event categories with 4.1 events. 
 
 \subsection{Efficiency and purity}
-It is now possible to calculate the efficiency and the purity of our $\nu_{e}$ CC0$\pi$-Np selection after the background-rejection cuts, as defined in Section \ref{sec:eff}. The background-rejection cuts were aimed to improve the significance of the $\nu_{e}$ CC0$\pi$-Np events in our sample. Thus, the efficiency decreases, from 41.1\% to 14.3\%, since the cuts will eventually remove also some signal events, but the purity increases by a factor of $\sim50$, from 0.5\% to 23.9\%. Figure \ref{fig:effafter} shows the efficiency as a function of the true neutrino energy and the purity as a function of the reconstructed energy, before and after the background rejection cuts. 
+It is now possible to calculate the efficiency and the purity of our $\nu_{e}$ CC0$\pi$-Np selection after the background-rejection cuts, as defined in Section \ref{sec:eff}. The background-rejection cuts were aimed to improve the significance of the $\nu_{e}$ CC0$\pi$-Np events in our sample. Thus, the efficiency decreases, from 41.1\% to 14.3\%, since the cuts will eventually remove also some signal events, but the purity increases by a factor of $\sim50$, from 0.5\% to 24.0\%. Figure \ref{fig:effafter} shows the efficiency as a function of the true neutrino energy and the purity as a function of the reconstructed energy, before and after the background rejection cuts. 
 
 \begin{figure}
   \begin{subfigure}{0.48\textwidth}
@@ -48,12 +48,12 @@ Table \ref{tab:effafter} shows the efficiency and the number of events selected 
 
      $\nu_{e}$ CC0$\pi$-Np       & & 34.8     & & 14.3   & & 4.9   & & 14.3\%\\
      $\nu_{e}$ CC                & & 35.7     & & 13.2   & & 1.6   & & 4.5\%\\
-     Beam intrinsic $\nu_{\mu}$  & & 11337.4  & & 918.3  & & 5.0   & & 0.044\%\\
-     Beam intrinsic NC           & & 3633.9   & & 342.2  & & 3.3   & & 0.09\%\\
-     Dirt                        & & 2609.5   & & 37.1   & & 0.3   & & 0.01\%\\
+     Beam intrinsic $\nu_{\mu}$  & & 11337.4  & & 918.3  & & 4.8   & & 0.04\%\\
+     Beam intrinsic NC           & & 3633.9   & & 342.2  & & 3.6   & & 0.1\%\\
+     Dirt                        & & 2609.5   & & 37.1   & & 0.2   & & 0.008\%\\
      Cosmic in-time              & & 135377.2 & & 1151.6 & & 3.5   & & 0.003\%\\
      Cosmic contaminated         & & -        & & 260.7  & & 1.1   & & 0.4\%\\
-     Cosmic                      & & -        & & 233.3  & & 0.9   & & 0.4\%\\
+     Cosmic                      & & -        & & 233.3  & & 0.7   & & 0.3\%\\
 
      \bottomrule
    \end{tabular}
@@ -73,4 +73,22 @@ Table \ref{tab:effafter} shows the efficiency and the number of events selected 
 
   \caption{Event displays of the collection plane of two $\nu_{e}$-like data events present in our sample after the background-rejection cuts. The gaps are caused by the presence of missing or unresponsive wires. The red lines correspond to reconstructed track-like objects and the green cones correspond to reconstructed shower-like objects. }
   \label{fig:evds}
+\end{figure}
+
+\subsubsection{Selection with increased purity}
+It is possible to apply stricter cuts in order to increase the purity of our selected sample. However, stricter cuts will correspond to a lower efficiency and also to a lower total number of selected data events, making the validation of this new set of cuts more difficult.
+Figure \ref{fig:hardcuts} shows the reconstructed energy spectrum of the selected events with:
+\begin{itemize}
+\item Distance of the most proton-like track < 2.5~cm (instead of 3~cm)
+\item 1.6~MeV/cm < $dE/dx$ of the most energetic shower < 2.6~MeV/cm (was 1.2~MeV/cm < $dE/dx$ < 3.2~MeV/cm)
+\item BDT score of the most proton-like tracks > 0 (was > -0.12).
+\end{itemize}
+These stricter cuts allow to achieve a purity larger than 50\% (51.5\%), decreasing however the efficiency from 14.3\% to 8.9\%. In particular, the \emph{cosmic in-time} background component is completely removed from the selected sample.
+The number of events have been scaled in this case to the predicted exposure of the MicroBooNE detector of \num{6.6e20} POT. 
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.65\linewidth]{figures/hardcuts.pdf}
+  \caption{Reconstructed energy spectrum of the selected events after stricter background-rejecting cuts. Numbers of events have been scaled to the predicted exposure of the MicroBooNE detector of \num{6.6e20} POT. }
+  \label{fig:hardcuts}
 \end{figure}

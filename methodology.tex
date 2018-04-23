@@ -14,7 +14,7 @@
 
 In the TPC, ionisation electrons passing through the MicroBooNE cryostat are drifted to the anode, inducing electric signals on the wires of the three TPC planes. The waveforms observed for each wire are examined and a hit-finding algorithm searches for local maxima and minima. A Gaussian distribution is fitted to each peak and hit objects are created. The hits are used by the reconstruction algorithms provided by the Pandora framework \cite{pandora} to form TPC reconstructed objects. 
 
-The Pandora reconstruction produces as a first stage a list of two-dimensional clusters, which represent continuous, unambiguous lines of hits. Thus, cluster-merging algorithms identify associations between multiple clusters. The three-dimensional track and shower reconstruction then collects the two-dimensional clusters from the three readout planes that represent individual, track-like or shower-like objects \cite{pandora2}. Our analysis relies on these high-level reconstructed objects to select our CC0$\pi$-Np candidates.
+The Pandora reconstruction produces as a first stage a list of two-dimensional clusters, which represent continuous, unambiguous lines of hits. Then, cluster-merging algorithms identify associations between multiple clusters. The three-dimensional track and shower reconstruction then collects the two-dimensional clusters from the three readout planes that represent individual track-like or shower-like objects \cite{pandora2}. Our analysis relies on these high-level reconstructed objects to select our CC0$\pi$-Np candidates.
 
 MicroBooNE is also equipped with an optical system made of 32 photomultipliers tubes placed behind the anode plane, with few-ns timing resolution. The optical system detects the argon scintillation light produced by the neutrino interaction and it provides the TPC start time of the event.
 Figure \ref{fig:evd} shows a simulated event display of one wire plane with an electron and two protons in the final state, with the corresponding reconstructed shower and reconstructed tracks. In this case, the algorithm was able to correctly reconstruct the electromagnetic shower and both proton tracks.
@@ -31,21 +31,22 @@ Figure \ref{fig:evd} shows a simulated event display of one wire plane with an e
 
 \subsection{Overview}
 
-In order to reconstruct the spectrum of the $\nu_{e}$ CC0$\pi$-Np events collected by the MicroBooNE experiment, this analysis has been divided into several, broadly linear stages:
+The reconstruction and selection of electron neutrino candidate events for this analysis has been divided into several stages:
 \begin{enumerate}
 \item Optical pre-cuts and flash-matching: a minimum amount of photoelectrons in the optical system is required. At least one of the neutrino candidates provided by the Pandora framework must be then compatible with the flash in the optical system.
-\item Electron neutrino topological pre-selection: one of the neutrino candidates must be compatible with the topology of a $\nu_{e}$ CC0$\pi$-Np interaction, that is at least one track and at least one shower or at least two showers sharing a common vertex.
+\item Electron neutrino topological pre-selection: one of the neutrino candidates must be compatible with the topology of a $\nu_{e}$ CC0$\pi$-Np interaction, that is at least one track and at least one shower or at least two showers sharing a common vertex.  Multiple showers are accepted due to track/shower mis-identification, discussed later.
 \item CC $\nu_{\mu}$ neutrino and cosmic-ray candidates removal: events tagged as CC $\nu_{\mu}$ neutrino candidates or non-neutrino induced are vetoed by an external module.
 \item Background rejection through calorimetric and geometric cuts: $\nu_{e}$ CC0$\pi$-Np events are further isolated applying several boxed cuts on kinematic, geometric, and calorimetric variables. The electromagnetic showers initiated by an electron in the final state are isolated with a cut on the $dE/dx$ value. The proton tracks are selected with a Boosted Decision Tree trained on the track $dQ/dx$ and its length.
 \item Energy spectrum reconstruction: the energy of the electron showers is measured with a hit-based procedure, while the energy deposited by the proton tracks is calculated from the length of the reconstructed track. 
 \end{enumerate}
 
 \subsection{Cosmic Hit Removal}
-Being located almost on surface, the MicroBooNE detector is constantly hit by atmospheric cosmic rays, at a rate of $\approx5$~kHz \cite{cosmic}. These cosmic rays will interact in the TPC, producing a combination of track-like and shower-like objects. 
+As a surface experiment, the MicroBooNE detector is constantly hit by atmospheric cosmic rays, at a rate of $\sim 5$~kHz \cite{cosmic}. These cosmic rays will interact in the TPC, producing a combination of track-like and shower-like objects. 
 In order to suppress this cosmogenic background, the Pandora framework runs in two different modes with different settings \cite{pandora}: (1) \texttt{pandoraCosmic}, optimized for cosmic rays reconstruction, and (2) \texttt{pandoraNu}, optimized for neutrino interactions reconstruction.
 The reconstructed hits are first fed to the framework in the \texttt{pandoraCosmic} mode. Then, a series of cosmic-ray tagging algorithms are applied to the objects reconstructed by Pandora in this mode \cite{ubxsec}. The reconstructed hits that are deemed to be of cosmic origin by the tagging algorithms are removed from the hit collection. The remaining hits are then fed again to the framework in the \texttt{pandoraNu} mode, which reconstructs the neutrino interaction candidates.
 
 \subsection{Optical Pre-Cuts}\label{sec:optical_pre_cuts}
+The optical selection requirements serve two purposes beyond a simple trigger condition.  First, they ensure that the optical flash that triggered the detector readout is compatible with the neutrino candidates from the \texttt{pandoraNu} reconstruction pass.  Second, they provide a way to discriminate between multiple \texttt{pandoraNu} neutrino candidate objects (most of which are cosmics) by selecting the one most compatible with the in-time flash.
 
 The first requirement ensures the presence of light in the detector in a position compatible with the center of the collected charge of the neutrino interaction candidate and with a timing compatible with the beam-gate window.
 
@@ -88,7 +89,7 @@ After that, the reconstructed flash is required to consist of at least 50 photo-
 
 \subsection{Optical Flash Matching}
 
-At this point it is guaranteed that the event has a properly reconstructed flash. A flash object has a time and a PE count for each of the 32 PMT's. From that, a position $Z\pm \sigma_Z$ and $Y\pm \sigma_Y$ are calculated. These can be compared with the. centre of deposited charge of the Pandora candidate. This comparison has the implicit assumption that the light will be emitted in the same relative fraction as the charge is deposited by the final state particles. This is not completely correct since the amount of scintillation light produced per deposited \SI{1}{\MeV} is particle dependent. Nevertheless, compared to the coarse resolution of the PMT grid, this approximation is justified. 
+At this point it is guaranteed that the event has a properly reconstructed flash. A flash object has a time and a PE count for each of the 32 PMT's. From that, a position $Z\pm \sigma_Z$ and $Y\pm \sigma_Y$ are calculated. These can be compared with the center of deposited charge of the Pandora candidate. This comparison has the implicit assumption that the light will be emitted in the same relative fraction as the charge is deposited by the final state particles. This is not completely correct since the amount of scintillation light produced per deposited \SI{1}{\MeV} is particle dependent. Nevertheless, compared to the coarse resolution of the PMT grid, this approximation is justified. 
 
 \begin{figure}[htbp]
 \centering
@@ -200,7 +201,7 @@ The start and end point of each track-like object and the start point of each sh
 
 The purity of the sample is defined as:
 \begin{equation}
-\epsilon = \frac{\mathrm{N.~of~selected~CC0}\pi\mathrm{{\text -}Np~events}}{\mathrm{N.~of~selected~events}},
+P = \frac{\mathrm{N.~of~selected~CC0}\pi\mathrm{{\text -}Np~events}}{\mathrm{N.~of~selected~events}},
 \end{equation}
 and it has been measured running the selection algorithm on a complete sample of neutrino events (not only $\nu_{e}$ interactions), weighted accordingly to the Booster Neutrino Beam (BNB) flux. In this sample every event will have at least one neutrino interacting in the cryostat volume and triggering the detector, plus all the cosmic rays hitting the detector in the same readout window. In the data, however, this is not always true, since the detector can be triggered also by a cosmic ray producing a flash in the optical system during the beam window, without necessarily having a neutrino interaction. In order to estimate this background component, defined as \emph{in-time cosmic rays}, we have used the data EXT sample, which was collected using the standard detector trigger, but with the neutrino beam off.
 
@@ -425,17 +426,9 @@ The first peak is caused by low-energy photons and, to a lesser extent, Compton 
 The energy of each electromagnetic shower is measured with the procedure described in Section \ref{sec:showerenergy}. A large number of cosmic in-time events will have a low shower energy, mainly caused by Michel electrons. A significant portion of charged-current $\nu_{\mu}$ events will also have low-energy showers caused by stopping muons and spurious hits. A cut of 50 MeV on the reconstructed energy of the most energetic shower removes a large fraction of the cosmic in-time and CC $\nu_{\mu}$ backgrounds, without significantly reducing the $\nu_{e}$ CC0$\pi$-Np efficiency. 
 % Figure \ref{fig:showerenergy} shows the reconstructed energy distribution of the most energetic shower in the low-energy region and the reconstructed energy spectrum after the shower energy cut.
 
-\subsubsection{Track distance}
-A well reconstructed event with a proton in the final state will have a reconstructed track close to the reconstructed neutrino vertex. However, the requirement on the distance between the reconstructed track and the reconstructed neutrino vertex can not be too strict, due to the limited neutrino vertex spatial resolution. Figure \ref{fig:dist} shows the histogram of the distance between the true neutrino vertex (corrected by the space-charge effect \cite{sce}) and the reconstructed neutrino vertex for simulated $\nu_{e}$ CC0$\pi$-Np events. Each reconstructed track is required to be within 3~cm the reconstructed neutrino vertex.
-
-\begin{figure}[htbp]
-\centering
-  \includegraphics[width=0.7\linewidth]{figures/dist.pdf}
-  \caption{Distance between the reconstructed neutrino vertex and the true neutrino vertex, corrected by the space-charge effect, for $\nu_{e}$ CC0$\pi$-Np simulated events.}\label{fig:dist}
-\end{figure}
 
 \subsubsection{Proton track BDT}\label{sec:protbdt}
-The aim of the analysis is to find $\nu_{e}$ CC$0\pi$-Np events. As such, it is necessary to identify events with non-proton tracks in the final state (e.g. pions and muons). A boosted decision tree (BDT) has been trained using the length of the track and its $dQ/dx$. In the training sample, the signal corresponds to reconstructed tracks matched to protons and the background to reconstructed tracks matched to muons. Figure \ref{fig:bdt} shows the $dQ/dx$ as a function of the track length and the BDT score for proton tracks and muon tracks. Each track in the event candidate must have a BDT score of at least -0.12, which corresponds to a signal efficiency of 98\% and a background rejection of 55\%. 
+The aim of the analysis is to find $\nu_{e}$ CC$0\pi$-Np events. As such, it is necessary to identify events with non-proton tracks in the final state (e.g. pions and muons). A boosted decision tree (BDT) has been trained using the length of the track and its $dQ/dx$. In the training sample, the signal corresponds to reconstructed tracks matched to protons and the background to reconstructed tracks matched to muons. Figure \ref{fig:bdt} shows the $dQ/dx$ as a function of the track length and the BDT score for proton tracks and muon tracks. At least a track in the event candidate is required to have a BDT score of at least -0.12, which corresponds to a signal efficiency of 98\% and a background rejection of 55\%. 
 
 \begin{figure}[htbp]
 \centering
@@ -449,6 +442,17 @@ The aim of the analysis is to find $\nu_{e}$ CC$0\pi$-Np events. As such, it is 
   \end{subfigure}
   \caption{Proton-like tracks are chosen from the score of a boosted decision tree, trained using the track length and the $dQ/dx$ for reconstructed protons (blue) and muons (red).}\label{fig:bdt}
 \end{figure}
+
+\subsubsection{Track distance}
+A well reconstructed event with a proton in the final state will have a reconstructed track close to the reconstructed neutrino vertex. However, the requirement on the distance between the reconstructed track and the reconstructed neutrino vertex can not be too strict, due to the limited neutrino vertex spatial resolution. Figure \ref{fig:dist} shows the histogram of the distance between the true neutrino vertex (corrected by the space-charge effect \cite{sce}) and the reconstructed neutrino vertex for simulated $\nu_{e}$ CC0$\pi$-Np events. The most proton-like track, chosen using the score assigned by the procedure described in Section \ref{sec:protbdt}, is required to be within 3~cm the reconstructed neutrino vertex.
+
+\begin{figure}[htbp]
+\centering
+  \includegraphics[width=0.7\linewidth]{figures/dist.pdf}
+  \caption{Distance between the reconstructed neutrino vertex and the true neutrino vertex, corrected by the space-charge effect, for $\nu_{e}$ CC0$\pi$-Np simulated events.}\label{fig:dist}
+\end{figure}
+
+
 
 \subsubsection{Track-shower angle}
 Low-energy electrons often start producing an appreciable shower in the detector after several centimeters. As such, the reconstruction framework identifies the first part of the shower as a track-like object and the last part of the shower as a shower-like object. 

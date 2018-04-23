@@ -42,18 +42,18 @@ E_{reco}^{e} = 0.78~E^{e} - 0.02~\mathrm{GeV}.
 CC$\pi^0$ events have been studied in order to validate the energy scale and reconstruction in the low-energy region in data as well as in the Monte Carlo. There is no aim for an analysis in the CC$\pi^0$ channel. Instead the purpose is to exploit a pure sample of $\pi^0$ decays, which can be used as standard candle to validate the energy reconstruction.
 The samples which have been used are:
 \begin{itemize}
-  \item Data: hand scanned CC$\pi^0$ sample, which has been already used in \cite{caratelli}
-  \item Monte Carlo: BNB intrinsic $\nu_{\mu}$ with cosmic rays. generator level requirements:
+  \item Data: hand scanned CC$\pi^0$ sample, which has been already used in \cite{caratelli}.
+  \item Monte Carlo: BNB intrinsic $\nu_{\mu}$ with cosmic rays.
 \end{itemize}
-The optical selection, described in section \ref{sec:optical_pre_cuts}, and the topological pre-selection, described in section \ref{sec:topological_pre_selection}, are applied to both samples.\\
+The optical selection, described in Section \ref{sec:optical_pre_cuts}, and the topological pre-selection, described in Section \ref{sec:topological_pre_selection}, are applied to both samples.
 An additional set of generator level requirements is applied to the Monte Carlo sample, in order to identify CC$\pi^0$ using truth information:
 \begin{itemize}
-    \item The selected neutrino interaction must be matched to the true neutrino interaction
-    \item The interaction must be a charged current interaction
-    \item Exactly one $\pi^0$ must be present in the final state
+    \item The selected neutrino candidate must be matched to the true neutrino interaction.
+    \item The interaction must be a charged current interaction.
+    \item Exactly one $\pi^0$ must be present in the final state.
 \end{itemize}
-Subsequently events are required to have at least two reconstructed showers, both with hits on the collection plane. The second requirement is meant to remove events with null shower energy, as the energy is computed from the collection plane only. The energy of the showers is calibrated as shown previously in section \ref{sec:showerenergy}, deriving correction factors from electrons-matched-showers using the simulation, as shown in Figure \ref{fig:ecalib}.
-The $\pi^0$ candidate is computed starting from the two most energetic showers. The distribution of the number of reconstructed showers in each event is shown in the left plot in Figure \ref{fig:mc_mass_e2} for data and MC.
+Subsequently events are required to have at least two reconstructed showers, both with hits on the collection plane. The second requirement is meant to remove events with null shower energy, as the energy is computed from the collection plane only. The energy of the showers is calibrated as shown previously in Section \ref{sec:showerenergy}, deriving correction factors from electrons-matched-showers using the simulation, as shown in Figure \ref{fig:ecalib}.
+The $\pi^0$ candidate is computed starting from the two most energetic showers. The distribution of the number of reconstructed showers in each event is shown in the left plot in Figure \ref{fig:mc_mass_e2} for data and Monte Carlo.
 
 As there are many events with more than two showers, about two thirds in data and one half in Monte Carlo, a simple re-clustering of the energy is performed. It is meant to recover the energy from broken showers. The two most energetic showers are considered. Then, the energy of any additional shower is summed to the closest in angle among the two most energetic showers. The direction of the two most energetic showers is not modified in this process. The mass is computed from the two most energetic showers, with the energy corrected after the re-clustering, as:
 \[ M = \sqrt{E_1 E_2 (1 - \cos\theta)} \]
@@ -71,7 +71,7 @@ where $E_1$ and $E_2$ are the energies of the most and the second most energetic
 \label{fig:mc_mass_e2}
 \end{figure}
 
-In some cases a significant amount of energy is missing. For instance, one of the two main showers is missed, and a smaller shower, resulting from noise or from mis-reconstruction of other objects, is taken as one of the decay products of the $\pi^0$. The right plot in Figure \ref{fig:mc_mass_e2} shows the bi-dimensional distribution of the invariant mass (x-axis) versus $E_2$ (x-axis) for Monte Carlo events. As it is possible to see, a significant amount of events has small $E_2$ and small mass. Thus, to take into account this effect and remove events with one shower badly or mis-reconstructed, the second most energetic shower is required to have reconstructed energy larger than 30~MeV.
+In some cases a significant amount of energy is missing. For instance, one of the two main showers is missed, and a smaller shower, resulting from noise or from mis-reconstruction of other objects, is taken as one of the decay products of the $\pi^0$. The right plot in Figure \ref{fig:mc_mass_e2} shows the bi-dimensional distribution of the invariant mass ($x$ axis) versus $E_2$ ($y$ axis) for Monte Carlo events. As it is possible to see, a significant amount of events has small $E_2$ and small mass. Thus, to take into account this effect and remove events with one shower badly or mis-reconstructed, the second most energetic shower is required to have reconstructed energy larger than 30~MeV.
 
 The final peak after the selection is shown in Figure \ref{fig:pi0_mass_peak}. The two histograms, for data and Monte Carlo, are fitted through a binned maximum likelihood (ML) fit with a crystal ball function, which consists of a Gaussian core, $C^1$-matched with a power-law right tail. The fit result, for what concerns the core is:
 \[ \text{Data:} \quad \mu = 133 \pm 7~\text{MeV}, \quad \sigma = 47 \pm 5~\text{MeV} \]
@@ -82,11 +82,14 @@ The two results are significantly close to the nominal mass of 135~MeV, and show
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.65\textwidth]{figures/pi0_mass_peak_final.pdf}
-\caption{Diphoton invariant mass distribution for data and Monte Carlo. The two lines show the crystal ball functions as obtained from the ML fit to the two histrograms.} 
+\caption{Di-photon invariant mass distribution for data and Monte Carlo. The two lines show the crystal ball functions as obtained from the ML fit to the two histograms.} 
 \label{fig:pi0_mass_peak}
 \end{figure}
 
-% \subsection{Hadronic Energy Reconstruction}
+\subsection{Hadronic Energy Reconstruction}
+\todo{Hadronic Energy Reconstruction}
+To be included in future iterations.
+
 \subsection{Single proton energy reconstruction and calibration}\label{sec:protonenergy}
 Proton energy reconstruction is obtained converting the reconstructed track length $L$ into deposited energy using the proton stopping power in liquid argon, as tabulated in \cite{pstar}. Liquid argon density $\rho_{\mathrm{LAr}}$ is assumed to be constant at 1.379~g/ml. Figure \ref{fig:proton} shows the proton kinetic energy as a function of the range of the proton in liquid argon (measured as $L \times \rho_{\mathrm{LAr}}$) .
 
@@ -113,4 +116,7 @@ E_{reco}^{p} = 0.99~E^{p}.
 
 % \subsubsection{Neutrino Produced Hadronic Energy Reconstruction}
 
-% \subsection{Neutrino Energy Reconstruction}
+\subsection{Neutrino Energy Reconstruction}
+\todo{Neutrino Energy Reconstruction}
+To be included in future iterations.
+
