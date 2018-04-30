@@ -57,7 +57,22 @@ In this section we will validate the background rejection cuts described in Sect
     \includegraphics[width=\linewidth]{figures/h_track_distance.pdf}
     \caption{POT normalized.} \label{fig:track_pot}
   \end{subfigure}
-  \caption{Integral and POT normalized distributions of the distance between each reconstructed track and the reconstructed neutrino vertex.}
+  \caption{Integral and POT normalized distributions of the distance between the most proton-like track and the reconstructed neutrino vertex.}
+\end{figure}
+
+\item[Shower distance $d_{s} < 10$~cm.] Figure \ref{fig:shower_norm} shows the distributions of the distance between the start-point of the leading shower and the reconstructed neutrino vertex for signal and background events. As expected, background neutrino events have a larger tail than the signal events. However, the limited shower start-point spatial resolution does not allow us to place a stricter cut on this variable. The agreement between data and Monte Carlo shown in Figure \ref{fig:shower_pot} is good.
+
+\begin{figure}[htbp]
+\centering
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\linewidth]{figures/h_shower_distance_norm.pdf}
+    \caption{Integral normalized.} \label{fig:shower_norm}
+  \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\linewidth]{figures/h_shower_distance.pdf}
+    \caption{POT normalized.} \label{fig:shower_pot}
+  \end{subfigure}
+  \caption{Integral and POT normalized distributions of the distance between the leading shower and the reconstructed neutrino vertex.}
 \end{figure}
 
 \item[Proton track BDT score $> -0.12$.] Figure \ref{fig:bdt_norm} shows the BDT score for the tracks in background and signal events, trained with the procedure described in Section \ref{sec:protbdt}. The cut at $-0.12$ allows to remove events with muon-like tracks. The data/Monte Carlo agreement shown in figure \ref{fig:bdt_pot} is good both in the signal region (high score) and in the background region (low score). The peak at -1 is caused by events with invalid $dQ/dx$ values (e.g. because of wrong vertex reconstruction).

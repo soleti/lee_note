@@ -141,7 +141,7 @@ An example of this procedure for a Monte Carlo generated $\nu_e$ event with 4 ne
 \label{fig:flashmatch}
 \end{figure}
 
-\subsection{Electron Neutrino Topological Pre-Selection}\label{sec:topological_pre_selection}
+\subsection{Electron Neutrino Topological Pre-Selection} \label{sec:topological_pre_selection}
 A perfect reconstruction of a $\nu_{e}$ CC0$\pi$-Np event in a LArTPC will produce as many reconstructed tracks as the number of protons in the final state and a single reconstructed shower (the electron), sharing a common vertex. However, the presence of missing or unresponsive wires can cause the splitting of an ionization track or an electromagnetic showers into two distinct reconstructed object. Also, the type of object (track or shower) is assigned by a Support Vector Machine (SVM) implemented in the Pandora framework and its performances depend on the quality of the event (e.g. the number of hits). A track-like object (e.g. a proton or a muon), then, can be mis-reconstructed as a shower-like object, especially when the number of reconstructed hits is low \cite{pandora2}. In order to maximize our efficiency, then, we will require (1) \emph{at least} one track and \emph{at least} one shower sharing a common vertex, or (2) \emph{at least} two showers sharing a common vertex. Figure \ref{fig:dia} shows the two diagrams of the accepted topologies for a $\nu_{e}$ CC0$\pi$-Np candidate event.
 
 \begin{figure}[htbp]
@@ -176,7 +176,9 @@ In this sample, every event has one $\nu_{e}$ interaction with one electron, at 
 In order to avoid border effects, such as electric field non-uniformities, the true neutrino interaction vertex must lie within a fiducial volume. Our fiducial volume cut is $\pm10$~cm on the $x$ axis, $\pm20$~cm on the $y$ axis, and $^{+10}_{-50}$~cm on the $z$ axis. 
 Since electromagnetic showers develop mainly in the forward direction with respect to the beam, the asymmetric cut on the $z$ axis (which corresponds to the beam direction) helps reject non-fully contained events.
 
-A study on the reconstruction efficiency of proton tracks and electron showers in $\nu_{e}$ CC$0\pi$-Np events shows that the efficiency is zero for proton with a kinetic energy below 40~MeV and for electrons with a kinetic energy below 20~MeV. As such, in our sample each event must have at least one proton above 40~MeV and one electron above 20~MeV. Figure \ref{fig:kin_eff} shows the reconstruction efficiencies for protons and electrons as a function of the kinetic energy.
+A study on the reconstruction efficiency of proton tracks and electron showers in $\nu_{e}$ CC$0\pi$-Np events shows that the efficiency is zero for proton with a kinetic energy below 40~MeV and for electrons with a kinetic energy below 20~MeV. The efficiency has been calculated by counting the number of reconstructed electrons or protons (regardless of their shower-like or track-like identification), divided by the number of generated protons and electrons. In the case of events with more than one proton, each proton has been counted individually.
+
+As such, in our sample each event must have at least one proton above 40~MeV and one electron above 20~MeV. Figure \ref{fig:kin_eff} shows the reconstruction efficiencies for simulated protons and electrons as a function of their generated kinetic energy, between 0 and 200 MeV.
 
 \begin{figure}[htbp]
   \begin{subfigure}{0.48\textwidth}
@@ -209,6 +211,8 @@ Figure \ref{fig:effpurity} shows the efficiency as a function of the true neutri
 As expected, the efficiency (purity) is proportional to the neutrino energy (reconstructed energy), since high-energy events correspond in general to a larger number of hits in the TPC and the Pandora framework reconstruction performances are proportional to the number of reconstructed hits 
 \cite{pandora2}. 
 
+\todo{Add efficiency plots over a larger energy region for protons and electrons.}
+
 \begin{figure}
   \begin{subfigure}{0.48\textwidth}
     \includegraphics[width=\linewidth]{figures/eff.pdf}
@@ -228,7 +232,7 @@ In order to understand the different background components, we divided our sampl
 \item[Beam intrinsic $\nu_{e}$ CC] charged-current $\nu_{e}$ neutrino interaction that is not in the $\nu_{e}$ CC$0\pi$-Np channel.
 \item[Beam intrinsic $\nu_{\mu}$] charged-current $\nu_{\mu}$ neutrino interaction.
 \item[Beam intrinsic NC] neutral current neutrino interaction (both $\nu_{\mu}$ and $\nu_{e}$).
-\item[Dirt] the neutrino interacts outside the TPC, but one or more final-state particles produce a neutrino candidate inside in the fiducial volume.
+\item[Outside fid. vol.] the true neutrino interaction happen outside the fiducial volume, but one or more final-state particles produce a reconstructed neutrino candidate inside in the fiducial volume.
 \item[Cosmic] there is a neutrino interaction in the event, but the cosmic-ray interaction happening during the same drift time is selected instead.
 \item[Cosmic in-time] there is no neutrino interaction in the event and a cosmic-ray interaction happening inside the beam gate time window is selected. It corresponds to the data EXT sample.
 \item[Cosmic contaminated] the neutrino interaction candidate contains at least a track or a shower generated by a cosmic ray.
@@ -248,7 +252,7 @@ Table \ref{tab:result} shows a summary of the selection algorithm results, with 
      $\nu_{e}$ CC                & & 35.7     & & 13.2   & & 37.0\%\\
      Beam intrinsic $\nu_{\mu}$  & & 11337.4  & & 918.3  & & 8.1\%\\
      Beam intrinsic NC           & & 3633.9   & & 342.2  & & 9.4\%\\
-     Dirt                        & & 2609.5   & & 37.1   & & 1.4\%\\
+     Outside fid. vol.           & & 2609.5   & & 37.1   & & 1.4\%\\
      Cosmic in-time              & & 135377.2 & & 1151.6 & & 0.9\%\\
      Cosmic contaminated         & & -        & & 260.7  & & -\\
      Cosmic                      & & -        & & 233.3  & & -\\
@@ -260,13 +264,28 @@ Table \ref{tab:result} shows a summary of the selection algorithm results, with 
 
 
 \subsection{CC \texorpdfstring{$\nu_{\mu}$}{numu} Event Rejection}\label{sec:numu}
-The module \texttt{UBXSec} \cite{ubxsec} looks for charged-current $\nu_{\mu}$ candidates and it also helps reject cosmic-induced background events.  Figure \ref{fig:spectrum} shows the reconstructed energy spectrum obtained vetoing the events that \texttt{UBXSec} flagged as CC $\nu_{\mu}$ candidates or cosmic-induced background. The reconstructed energy has been measured with the procedure described in Section \ref{sec:energyreco}, after reclassifying the reconstructed Pandora objects as described in Section \ref{sec:reclass}. The ratio between the number of data events and the number of Monte Carlo events (POT normalized) is 1 and the low value of the $\chi^{2} / \mathrm{n.d.f.}$ (1.06) shows that the two distributions agree also in shape. This plot also shows that our selection procedure has similar performances in data and Monte Carlo and that there is no evident bias in the energy reconstruction.
+The module \texttt{UBXSec} \cite{ubxsec} looks for charged-current $\nu_{\mu}$ candidates and it also helps reject cosmic-induced background events.  Figure \ref{fig:spectrum} shows the reconstructed energy spectrum obtained vetoing the events that \texttt{UBXSec} flagged as CC $\nu_{\mu}$ candidates or cosmic-induced background. The reconstructed energy has been measured with the procedure described in Section \ref{sec:energyreco}, after reclassifying the reconstructed Pandora objects as described in Section \ref{sec:reclass}. The ratio between the number of data events and the number of Monte Carlo events (POT normalized) is 1 and the low value of the $\chi^{2} / \mathrm{n.d.f.}$ (1.06) shows that the two distributions agree also in shape. This plot also shows that our selection procedure has similar performances in data and Monte Carlo and that there is no evident bias in the energy reconstruction. 
 
 \begin{figure}[htbp]
 \centering
   \includegraphics[width=0.65\linewidth]{figures/h_fixed_energy.pdf}
   \caption{Reconstructed energy spectrum after the event selection algorithm and the veto of the events selected by the \texttt{UBXSec} module. The histograms of the event categories are stacked.}
   \label{fig:spectrum}
+\end{figure}
+
+Figure \ref{fig:thetaphi} shows the angular distributions of the most energetic shower-like object for data and Monte Carlo. The inclination angle $\theta$ distribution agrees well both for shape and normalization. The azimuthal angle $\phi$ distribution shows a slight disagreement around $\phi = 0^{\circ}$ and $\phi = \pm180^{\circ}$.
+
+\begin{figure}[htbp]
+\centering
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\linewidth]{figures/h_shower_theta.pdf}
+    \caption{Inclination angle $\theta$.} 
+  \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\linewidth]{figures/h_shower_phi.pdf}
+    \caption{Azimuthal angle $\phi$.} 
+  \end{subfigure}
+  \caption{Distribution of the azimuthal angle $\phi$ and the inclination angle $\theta$ of the most energetic shower after the CC \texorpdfstring{$\nu_{\mu}$}{numu} event rejection stage.}\label{fig:thetaphi}
 \end{figure}
 
 
@@ -350,7 +369,7 @@ In order to solve this discrepancy it is possible to reclassify the reconstructe
 
 The Pandora reconstruction framework can split the electromagnetic shower in two or more objects: however, even if distinct, the showers will have in general a low angular separation. A small reconstructed shower-like object with a high angular separation from the most energetic one has a high probability to be in reality a mis-reconstructed proton track. Thus, we reclassify the shower-like objects based on the angular separation between each small shower-like object and the most-energetic shower: if the angle is larger than $15^{\circ}$, the shower-like object is reclassified as a track-like object.
 
-Figure \ref{fig:showerangle} shows the proton reconstruction efficiency and purity as a function of the angular reclassification cut. The $15^{\circ}$ threshold is chosen because it maximizes the efficiency while keeping a reasonable reconstruction purity (above 70\%).
+Figure \ref{fig:showerangle} shows the proton reconstruction efficiency and purity as a function of the angular reclassification cut. The efficiency here is defined as the ratio between the number of protons in the final state above threshold and the number of proton-associated reconstructed tracks. The purity is defined as the ration between the number of proton-associated reconstructed tracks and the total number of reconstructed tracks. These two quantities have been measured in a sample of $\nu_{e}$ CC0$\pi$-Np events that pass our selection algorithm.  The $15^{\circ}$ threshold is chosen because it maximizes the efficiency while keeping a reasonable reconstruction purity (above 70\%).
 
 \begin{figure}[htbp]
 \centering
@@ -380,7 +399,7 @@ Figure \ref{fig:nshowers_after} shows the number of shower-like objects and the 
 \subsubsection{Introduction}
 In this section we will describe the cuts applied to our selected sample, in order to isolate the $\nu_{e}$ CC$0\pi$-Np event candidates. The cuts have been chosen to (1) reduce the background, and (2) ensure that the selected events are well reconstructed. The values of each cut have been chosen manually. It would have been possible, in theory, to calculate an optimal set of cuts, maximized by the significance of the $\nu_{e}$ CC0$\pi$-Np events. However, this set of cuts would not have allowed a correct validation of the final selected sample, due to the limited size of the data unblinded sample. As such, the chosen cuts increase the purity of our sample, but also retain a significant amount ($\approx 20$) of selected data events.
 
-\subsubsection{Shower \texorpdfstring{$dE/dx$}{dE/dx}}
+\subsubsection{Shower \texorpdfstring{$dE/dx$}{dE/dx}}\label{sec:dedx}
 The rate of energy loss per length ($dE/dx$) for electromagnetic showers is measured with a procedure analogous to the one described in \cite{argoneut}. All the hits of the collection plane within a rectangle of 4~cm along the direction of the shower and 1~cm perpendicular to the shower are collected. Figure \ref{fig:evddedx} shows a Monte Carlo event display with an electron shower and the rectangle used to measure the $dE/dx$.
 
 \begin{figure}[htbp]
@@ -428,7 +447,7 @@ The energy of each electromagnetic shower is measured with the procedure describ
 
 
 \subsubsection{Proton track BDT}\label{sec:protbdt}
-The aim of the analysis is to find $\nu_{e}$ CC$0\pi$-Np events. As such, it is necessary to identify events with non-proton tracks in the final state (e.g. pions and muons). A boosted decision tree (BDT) has been trained using the length of the track and its $dQ/dx$. In the training sample, the signal corresponds to reconstructed tracks matched to protons and the background to reconstructed tracks matched to muons. Figure \ref{fig:bdt} shows the $dQ/dx$ as a function of the track length and the BDT score for proton tracks and muon tracks. At least a track in the event candidate is required to have a BDT score of at least -0.12, which corresponds to a signal efficiency of 98\% and a background rejection of 55\%. 
+The aim of the analysis is to find $\nu_{e}$ CC$0\pi$-Np events. As such, it is necessary to identify events with non-proton tracks in the final state (e.g. pions and muons). A boosted decision tree (BDT) has been trained using the length of the track and its $dQ/dx$. The track $dQ/dx$ has been calculated by taking the median the $dQ/dx$ hit distribution. The training sample is a simulated dataset of BNB neutrino interactions with CORSIKA cosmic rays. The signal is defined as all the reconstructed tracks matched to simulated protons and the background as reconstructed tracks matched to simulated muons. Figure \ref{fig:bdt} shows the $dQ/dx$ as a function of the track length and the BDT score for proton tracks and muon tracks. At least a track in the event candidate is required to have a BDT score of at least -0.12, which corresponds to a signal efficiency of 98\% and a background rejection of 55\%. 
 
 \begin{figure}[htbp]
 \centering
@@ -444,7 +463,7 @@ The aim of the analysis is to find $\nu_{e}$ CC$0\pi$-Np events. As such, it is 
 \end{figure}
 
 \subsubsection{Track distance}
-A well reconstructed event with a proton in the final state will have a reconstructed track close to the reconstructed neutrino vertex. However, the requirement on the distance between the reconstructed track and the reconstructed neutrino vertex can not be too strict, due to the limited neutrino vertex spatial resolution. Figure \ref{fig:dist} shows the histogram of the distance between the true neutrino vertex (corrected by the space-charge effect \cite{sce}) and the reconstructed neutrino vertex for simulated $\nu_{e}$ CC0$\pi$-Np events. The most proton-like track, chosen using the score assigned by the procedure described in Section \ref{sec:protbdt}, is required to be within 3~cm the reconstructed neutrino vertex.
+A well reconstructed event with a proton in the final state will have a reconstructed track close to the reconstructed neutrino vertex. However, the requirement on the distance between the reconstructed track and the reconstructed neutrino vertex can not be too strict, due to the limited neutrino vertex spatial resolution. Figure \ref{fig:dist} shows the histogram of the distance between the true neutrino vertex (corrected by the space-charge effect \cite{sce}) and the reconstructed neutrino vertex for simulated $\nu_{e}$ CC0$\pi$-Np events. The most proton-like track, chosen using the score assigned by the procedure described in Section \ref{sec:protbdt}, is required to be within 3~cm the reconstructed neutrino vertex ($d_t < 3$~cm).
 
 \begin{figure}[htbp]
 \centering
@@ -452,7 +471,8 @@ A well reconstructed event with a proton in the final state will have a reconstr
   \caption{Distance between the reconstructed neutrino vertex and the true neutrino vertex, corrected by the space-charge effect, for $\nu_{e}$ CC0$\pi$-Np simulated events.}\label{fig:dist}
 \end{figure}
 
-
+\subsubsection{Shower distance}
+Liquid argon TPC such as MicroBooNE can distinguish between photons and electrons in two ways: (1) measuring the $dE/dx$ of the electromagnetic shower (as described in Section \ref{sec:dedx}), and (2) measuring the gap between the interaction vertex and the start of the electromagnetic shower. In fact, photons produced in the final state of the neutrino interaction can travel several centimeters without interacting. In order to suppress events with a photon in the final state, the leading shower starting point is required to be within 10 cm  the reconstructed neutrino vertex ($d_{s} < 10$~cm).
 
 \subsubsection{Track-shower angle}
 Low-energy electrons often start producing an appreciable shower in the detector after several centimeters. As such, the reconstruction framework identifies the first part of the shower as a track-like object and the last part of the shower as a shower-like object. 

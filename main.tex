@@ -17,8 +17,8 @@
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage[colorlinks=true]{hyperref}
 \usepackage{siunitx}
-% \usepackage{subfigure}
 \usepackage{subcaption}
+\usepackage{float}
 
 \graphicspath{{_fig_optical/}}
 \linenumbers
@@ -45,148 +45,10 @@ time-projection chamber experiment designed for short-baseline neutrino physics,
 \input{electron_like}
 \input{outlook}
 \input{conclusion}
-
 \newpage
+\input{biblio}
+\newpage
+\input{appendix}
 
-\begin{thebibliography}{99}
-
-\bibitem{miniboone}
-  A.~A.~Aguilar-Arevalo {\emph{et al.}} [MiniBooNE Collaboration],
-  ``Unexplained Excess of Electron-Like Events From a 1-GeV Neutrino Beam,''
-  Phys.\ Rev.\ Lett.\  \textbf{102} (2009) 101802
-  doi:10.1103/PhysRevLett.102.101802
-  \href{https://arxiv.org/abs/0812.2243}{\texttt{[arXiv:0812.2243 [hep-ex]]}}.
-  %%CITATION = doi:10.1103/PhysRevLett.102.101802;%%
-  %385 citations counted in INSPIRE as of 06 Dec 2017
-  
-\bibitem{icecube}
-  M.~G.~Aartsen {\emph{et al.}} [IceCube Collaboration],
-  ``Constraints on Ultrahigh-Energy Cosmic-Ray Sources from a Search for Neutrinos above 10 PeV with IceCube,''
-  Phys.\ Rev.\ Lett.\  \textbf{117} (2016) no.24,  241101
-  doi:10.1103/PhysRevLett.117.241101
-  \href{https://arxiv.org/abs/1607.05886}{\texttt{[arXiv:1607.05886 [astro-ph.HE]]}}.
-  %%CITATION = doi:10.1103/PhysRevLett.117.241101;%%
-  %39 citations counted in INSPIRE as of 06 Dec 2017
-  
-\bibitem{Formaggio:2013kya}
-  J.~A.~Formaggio and G.~P.~Zeller,
-  ``From eV to EeV: Neutrino Cross Sections Across Energy Scales,''
-  Rev.\ Mod.\ Phys.\  \textbf{84} (2012) 1307
-  doi:10.1103/RevModPhys.84.1307
-  \href{https://arxiv.org/abs/1305.7513}{\texttt{[arXiv:1305.7513 [hep-ex]]}}.
-  %%CITATION = doi:10.1103/RevModPhys.84.1307;%%
-  %221 citations counted in INSPIRE as of 08 Dec 2017
-  
-  
-     \bibitem{nuecc}
-  M.~Day and K.~S.~McFarland,
-  ``Differences in Quasi-Elastic Cross-Sections of Muon and Electron Neutrinos,''
-  Phys.\ Rev.\ D \textbf{86} (2012) 05300 
-  doi:10.1103/PhysRevC.86.054606
-  \href{https://arxiv.org/abs/1206.6745}{\texttt{[arXiv:1206.6745 [hep-ph]]}}.
-  %%CITATION = doi:10.1103/PhysRevC.86.054606;%%
-  %81 citations counted in INSPIRE as of 13 Dec 2017
-  
-  \bibitem{genie}
-  C.~Andreopoulos \emph{et al.},
-  ``The GENIE Neutrino Monte Carlo Generator,''
-  Nucl.\ Instrum.\ Meth.\ A \textbf{ 614} (2010) 87
-  doi:10.1016/j.nima.2009.12.009
-  \href{https://arxiv.org/abs/0905.2517}{\texttt{[arXiv:0905.2517 [hep-ph]]}}.
-  %%CITATION = doi:10.1016/j.nima.2009.12.009;%%
-  %473 citations counted in INSPIRE as of 15 Dec 2017
-  
-  \bibitem{corsika} D.~Heck \emph{et al.},
-  ``CORSIKA: A Monte Carlo code to simulate extensive air showers'', 1998,
-  \texttt{FZKA-6019}.
-  
-    \bibitem{pandora2} R.~Acciarri \emph{et al.} [MicroBooNE Collaboration], ``The Pandora multi-algorithm approach to automated pattern recognition of cosmic-ray muon and neutrino events in the MicroBooNE detector'', \href{https://arxiv.org/abs/1708.03135}{\texttt{[arXiv:1708.03135 [physics.hep-ex]]}}, accepted by Eur. Phys. J. C.
-  
-  \bibitem{ccqe2}
-  M.~Martini and M.~Ericson,
-  ``Quasielastic and multinucleon excitations in antineutrino-nucleus interactions,''
-  Phys.\ Rev.\ C \textbf{87} (2013) no.6,  065501
-  doi:10.1103/PhysRevC.87.065501
-  \href{https://arxiv.org/abs/1303.7199}{\texttt{[arXiv:1303.7199 [nucl-th]]}}.
-  %%CITATION = doi:10.1103/PhysRevC.87.065501;%%
-  %59 citations counted in INSPIRE as of 13 Dec 2017
-  
- 
-  \bibitem{pandora} J.~S.~Marshall and M.~A.~Thomson, 
-  ``The Pandora Software Development Kit for Pattern Recognition'', Eur.\ Phys.\ J.\ C \textbf{75}, no. 9, 439 (2015) doi:10.1140/epjc/s10052\-015-3659-3 \href{https://arxiv.org/abs/1506.05348}{\texttt{[arXiv:1506.05348 [physics.data-an]]}}.
- 
-  \bibitem{cosmic} R.~Acciarri et al. [MicroBooNE Collaboration], ``Cosmic Shielding Studies at MicroBooNE'', MICROBOONE-NOTE-1005-PUB, \href{http://microboone.fnal.gov/wp-content/uploads/MICROBOONE-NOTE-1005-PUB.pdf}{\path{http://microboone.fnal.gov/wp-content/uploads/MICROBOONE-NOTE-1005-PUB.pdf}}
-
-  \bibitem{teppei}
-  T.~Katori [MiniBooNE and SciBooNE Collaborations],
-  ``Cross section analyses in MiniBooNE and SciBooNE experiments,''
-  AIP Conf.\ Proc.\  \textbf{ 1663} (2015) 020001
-  doi:10.1063/1.4919461
-  \href{https://arxiv.org/abs/1304.5325}{\texttt{[arXiv:1304.5325 [hep-ex]]}}.
-  %%CITATION = doi:10.1063/1.4919461;%%
-  %5 citations counted in INSPIRE as of 17 Jan 2018
-  
- \bibitem{argoneut}
-  R.~Acciarri \emph{et al.} [ArgoNeuT Collaboration],
-  ``First Observation of Low Energy Electron Neutrinos in a Liquid Argon Time Projection Chamber,''
-  Phys.\ Rev.\ D \textbf{ 95} (2017) no.7,  072005
-  doi:10.1103/PhysRevD.95.072005
-  \href{https://arxiv.org/abs/1610.04102}{\texttt{[arXiv:1610.04102 [hep-ex]]}}.
-  %%CITATION = doi:10.1103/PhysRevD.95.072005;%%
-  %5 citations counted in INSPIRE as of 20 Dec 2017
-  
-  \bibitem{proton}
-  R.~Acciarri \emph{et al.} [MicroBooNE Collaboration],
-  ``Proton Track Identication in MicroBooNE Simulation for Neutral Current Elastic Events,'' MICROBOONE-NOTE-1025-PUB,
-  \url{http://microboone.fnal.gov/wp-content/uploads/MICROBOONE-NOTE-1025-PUB.pdf}.
-
-  \bibitem{ubxsec}
-  R.~Acciarri \emph{et al.} [MicroBooNE Collaboration],
-  ``Muon-Neutrino Charged-Current Inclusive Analysis,'' \emph{in preparation}.
-
-\bibitem{michel} 
-  R.~Acciarri {\it et al.} [MicroBooNE Collaboration],
-  ``Michel Electron Reconstruction Using Cosmic-Ray Data from the MicroBooNE LArTPC,''
-  JINST {\bf 12}, no. 09, P09014 (2017)
-  doi:10.1088/1748-0221/12/09/P09014
-  \href{https://arxiv.org/abs/1704.02927}{\texttt{[arXiv:1704.02927 [physics.ins-det]]}}.
-  %%CITATION = doi:10.1088/1748-0221/12/09/P09014;%%
-  %6 citations counted in INSPIRE as of 09 Apr 2018
-
-\bibitem{pdg} Particle Data Group, ``Atomic and nuclear properties of liquid argon (Ar)'' \url{http://pdg.lbl.gov/2012/AtomicNuclearProperties/MUON_ELOSS_TABLES/muonloss_289.pdf}, retrieved Apr. 9, 2018
-
-\bibitem{workfunction} M.E. Shibamura et al., ``Drift velocities of electrons, saturation characteristics of ionization and W-values for conversion electrons in liquid argon, liquid argon-gas mixtures and liquid xenon'', Nucl. Instrumentation Meth., 131, (1975) p249
-
-\bibitem{boxmodel} R. Acciarri et al., [ArgoNeuT Collaboration], ``A study of electron recombination using highly ionizing particles in the ArgoNeuT Liquid Argon TPC'', JINST {\bf 8} (2013) P08005
-558 \href{https://arxiv.org/abs/1306.1712}{\texttt{arXiv:1306.1712 [hep-ex]}}.
-
-\bibitem{detector}
-  R.~Acciarri {\it et al.} [MicroBooNE Collaboration],
-  ``Design and Construction of the MicroBooNE Detector,''
-  JINST {\bf 12}, no. 02, P02017 (2017)
-  doi:10.1088/1748-0221/12/02/P02017
-  \href{https://arxiv.org/abs/1612.05824}{[arXiv:1612.05824 [physics.ins-det]]}.
-  %%CITATION = doi:10.1088/1748-0221/12/02/P02017;%%
-  %35 citations counted in INSPIRE as of 10 Apr 2018
-
-\bibitem{caratelli} 
-  D.~Caratelli,
-  ``Study of Electromagnetic Interactions in the MicroBooNE Liquid Argon Time Projection Chamber,'' PhD thesis,
-  doi:10.2172/1420402
-  %%CITATION = doi:10.2172/1420402;%%
-  
-\bibitem{sce} R.~Acciarri et al. [MicroBooNE Collaboration], ``Study of Space Charge Effects in MicroBooNE'', MICROBOONE-NOTE-1018-PUB, \href{https://www-microboone.fnal.gov/publications/publicnotes/MICROBOONE-NOTE-1018-PUB.pdf}{\path{https://www-microboone.fnal.gov/publications/publicnotes/MICROBOONE-NOTE-1018-PUB.pdf}}
-
-\bibitem{pstar} M.J. Berger, J.S. Coursey, M.A. Zucker, M.A., and J. Chang, ``ESTAR, PSTAR, and ASTAR: Computer Programs for Calculating Stopping-Power and Range Tables for Electrons, Protons, and Helium Ions (version 1.2.3)'' (2005), \href{http://physics.nist.gov/Star}{\path{http://physics.nist.gov/Star}} [2018, April 18]. National Institute of Standards and Technology, Gaithersburg, MD.
-
-
-\end{thebibliography}
-% \subsection{How to add Citations and a References List}
-
-% You can upload a \verb|.bib| file containing your BibTeX entries, created with JabRef; or import your \href{https://www.overleaf.com/blog/184}{Mendeley}, CiteULike or Zotero library as a \verb|.bib| file. You can then cite entries from it, like this: \cite{greenwade93}. Just remember to specify a bibliography style, as well as the filename of the \verb|.bib|.
-
-
-% \bibliographystyle{alpha}
-% \bibliography{sample}
 
 \end{document}
